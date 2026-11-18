@@ -442,3 +442,36 @@ if (stage && !reduce) {
     requestAnimationFrame(tick);
   }, { threshold: .4 }).observe(stage);
 }
+
+// Count-up numbers ([data-count]) when they scroll into view
+const counters = document.querySelectorAll('[data-count]');
+if (counters.length && !reduce) {
+  counters.forEach(el => { el.dataset.final = el.textContent; el.textContent = '0'; });
+  const io3 = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; io3.unobserve(e.target);
+    const el = e.target, to = +el.dataset.count, dec = +(el.dataset.dec || 0), t0 = performance.now(), D = 1400;
+    const tick = t => { const k = Math.min(1, (t - t0) / D), v = to * (1 - Math.pow(1 - k, 3)); el.textContent = k < 1 ? v.toFixed(dec) : el.dataset.final; if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }), { threshold: .6 });
+  counters.forEach(el => io3.observe(el));
+}
+
+// EcoPinet milestones: click a step or let it play through on a loop
+const ms = document.querySelector('.milestones');
+if (ms) {
+  const btns = [...ms.querySelectorAll('.ms-tabs button')], figs = [...ms.querySelectorAll('.ms-view figure')], run = ms.querySelector('.ms-run');
+  let cur = 0, timer = null, start = 0, visible = false, paused = false; const DUR = 4200;
+  const show = i => { cur = i; btns.forEach((b, k) => b.setAttribute('aria-selected', k === i)); figs.forEach((f, k) => f.classList.toggle('on', k === i)); start = performance.now(); };
+  const loop = t => {
+    if (!visible || paused || reduce) { run.style.width = '0'; return; }
+    const b = btns[cur], k = Math.min(1, (t - start) / DUR);
+    run.style.left = b.offsetLeft + 'px'; run.style.width = (b.offsetWidth * k) + 'px';
+    if (k >= 1) show((cur + 1) % btns.length);
+    timer = requestAnimationFrame(loop);
+  };
+  btns.forEach((b, i) => b.addEventListener('click', () => { show(i); }));
+  ms.addEventListener('pointerenter', () => { paused = true; run.style.width = '0'; });
+  ms.addEventListener('pointerleave', () => { paused = false; start = performance.now(); requestAnimationFrame(loop); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) { start = performance.now(); cancelAnimationFrame(timer); requestAnimationFrame(loop); } }, { threshold: .4 }).observe(ms);
+  show(0);
+}
