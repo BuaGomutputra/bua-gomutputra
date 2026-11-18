@@ -121,8 +121,24 @@ document.querySelectorAll('.carousel').forEach(c => {
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .3 });
 document.querySelectorAll('.ending, .reveal').forEach(el => reduce ? el.classList.add('seen') : io.observe(el));
 
+// Case study: click any image to see it big (lightbox)
+const zoomables = document.querySelectorAll('.cs2 .blk figure img, .cs2 .fig img, .cs2 .card img, .cs2 .hero-img');
+if (zoomables.length) {
+  const lb = document.createElement('div'); lb.className = 'lightbox'; lb.innerHTML = '<img alt=""><p>Click anywhere or press Esc to close</p>'; document.body.appendChild(lb);
+  const big = lb.querySelector('img');
+  const close = () => lb.classList.remove('on');
+  zoomables.forEach(img => {
+    img.classList.add('zoomable'); img.dataset.pill = 'Enlarge'; img.tabIndex = 0;
+    const open = () => { big.src = img.currentSrc || img.src; big.alt = img.alt; lb.classList.add('on'); };
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+  });
+  lb.addEventListener('click', close);
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+}
+
 // Project tiles: flower cursor grows into a "View <project>" pill (mouse only)
-const projTiles = document.querySelectorAll('a.slot');
+const projTiles = document.querySelectorAll('a.slot, [data-pill]');
 if (projTiles.length && matchMedia('(hover: hover)').matches) {
   document.documentElement.classList.add('has-pill');
   const pill = document.createElement('div');
@@ -133,7 +149,7 @@ if (projTiles.length && matchMedia('(hover: hover)').matches) {
   addEventListener('pointermove', e => { pill.style.transform = `translate3d(${e.clientX - 13}px, ${e.clientY - 4}px, 0)`; }, { passive: true });
   projTiles.forEach(t => {
     const name = t.querySelector('.tag b')?.textContent || t.querySelector('img')?.alt || 'project';
-    t.addEventListener('pointerenter', () => { label.textContent = 'View ' + name; pill.classList.add('on'); });
+    t.addEventListener('pointerenter', () => { label.textContent = t.dataset.pill || ('View ' + name); pill.classList.add('on'); });
     t.addEventListener('pointerleave', () => pill.classList.remove('on'));
   });
 }
@@ -260,4 +276,36 @@ if (tocLinks.length) {
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update); update();
+}
+
+// SideBy page extras
+if (document.body.classList.contains('cs2')) {
+  // cards tilt toward the mouse with a soft glow
+  if (matchMedia('(hover: hover)').matches && !reduce) document.querySelectorAll('.tilt-group > div').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.setProperty('--mx', x * 100 + '%'); card.style.setProperty('--my', y * 100 + '%');
+      card.style.transform = `perspective(800px) rotateX(${(.5 - y) * 8}deg) rotateY(${(x - .5) * 10}deg) translateY(-4px)`;
+    });
+    card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+  });
+  // 4 in 10 pictogram fills in when it scrolls into view
+  const stat = document.querySelector('.stat');
+  if (stat) { if (reduce) stat.classList.add('seen'); else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { stat.classList.add('seen'); o.disconnect(); } }, { threshold: .6 }).observe(stat); }
+  // VeriDate -> SideBy flip
+  const flip = document.querySelector('.flip');
+  if (flip) {
+    const set = st => { flip.dataset.state = st; flip.querySelectorAll('[data-to]').forEach(b => b.setAttribute('aria-selected', b.dataset.to === st)); };
+    flip.querySelectorAll('[data-to]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); set(b.dataset.to); }));
+    flip.querySelector('.flip-card').addEventListener('click', () => set(flip.dataset.state === 'before' ? 'after' : 'before'));
+  }
+  // reading progress line next to the contents list
+  const toc = document.querySelector('.toc');
+  if (toc) { const prog = () => toc.style.setProperty('--p', Math.min(1, scrollY / (document.documentElement.scrollHeight - innerHeight))); addEventListener('scroll', prog, { passive: true }); prog(); }
+  // ending logo drifts with the mouse
+  const mark = document.querySelector('.cs2 .ending .mark'), end = document.querySelector('.cs2 .ending');
+  if (mark && !reduce && matchMedia('(hover: hover)').matches) end.addEventListener('pointermove', e => {
+    const r = end.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    mark.style.translate = `${x * 30}px ${y * 20}px`; mark.style.rotate = `${x * 6}deg`;
+  });
 }

@@ -227,6 +227,46 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .cs2 .ending{margin-top:120px}
 .cs2 .ending .next{font-family:var(--kiwi);font-size:20px}
 
+/* SideBy interactions */
+.has-pill [data-pill],.has-pill [data-pill] *{cursor:none}
+.cs2 .zoomable{cursor:zoom-in;transition:transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .4s}
+@media (hover:hover){.cs2 .zoomable:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(22,19,63,.18)}}
+.lightbox{position:fixed;inset:0;z-index:1500;background:rgba(14,12,40,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:4vw;opacity:0;pointer-events:none;transition:opacity .25s}
+.lightbox.on{opacity:1;pointer-events:auto;cursor:zoom-out}
+.lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:scale(.94);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.lightbox.on img{transform:none}
+.lightbox p{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-family:var(--mono);font-size:12px;color:#CFCAF5}
+.tilt-group>div{transform-style:preserve-3d;transition:transform .6s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden}
+.tilt-group>div::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(196,244,255,.28),transparent 60%)}
+.decisions.tilt-group>div::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(91,75,214,.12),transparent 60%)}
+.tilt-group>div:hover::after{opacity:1}
+.stat{flex-direction:column;align-items:stretch;gap:18px}
+.stat-top{display:flex;gap:24px;align-items:baseline}
+.people{display:flex;gap:10px}
+.people i{width:22px;height:36px;display:block}
+.people svg{width:100%;height:100%;fill:var(--lav2);transition:fill .4s,transform .5s cubic-bezier(.34,1.56,.64,1);transition-delay:calc(var(--i) * 90ms)}
+.stat.seen .people i:nth-child(-n+4) svg{fill:var(--accent);transform:translateY(-4px)}
+.flip{margin:28px 0 48px;max-width:560px}
+.flip-switch{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:var(--lav);border-radius:999px;padding:4px}
+.flip-switch button{position:relative;z-index:1;border:0;background:none;font-family:var(--mono);font-size:13px;padding:9px 18px;border-radius:999px;color:var(--soft);transition:color .3s}
+.flip-switch i{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(22,19,63,.12);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.flip[data-state=after] .flip-switch i{transform:translateX(100%);background:var(--deep)}
+.flip[data-state=after] .flip-switch button[data-to=after]{color:#fff}
+.flip[data-state=before] .flip-switch button[data-to=before]{color:var(--ink)}
+.flip-card{position:relative;margin-top:14px;height:190px;perspective:1200px}
+.face{position:absolute;inset:0;border-radius:14px;padding:26px 28px;backface-visibility:hidden;transition:transform .7s cubic-bezier(.34,1.4,.64,1)}
+.face b{display:block;font-size:24px;font-weight:600;margin-bottom:10px}
+.face ul{list-style:none;font-size:16px;line-height:1.75}
+.face.before{background:#F0F0F0;color:var(--soft)}
+.face.before b{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:rgba(20,20,20,.35)}
+.face.after{background:var(--deep);color:#F3F1FF;background-image:radial-gradient(120% 80% at 100% 0%,rgba(107,92,242,.5),transparent 60%);transform:rotateY(180deg)}
+.flip[data-state=after] .face.before{transform:rotateY(-180deg)}
+.flip[data-state=after] .face.after{transform:rotateY(0)}
+.flip-hint{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:10px}
+.toc ol{position:relative;border-left:1px solid var(--lav2);padding:2px 0 2px 16px;margin-left:-17px}
+.toc ol::before{content:"";position:absolute;left:-1px;top:0;width:1px;height:calc(100% * var(--p,0));background:var(--accent);transition:height .15s linear}
+.cs2 .ending .mark{will-change:transform}
+
 /* about — sizes from the 1440 "About Me" Figma frame */
 .about-hero{position:relative;max-width:1440px;margin:0 auto;height:min(43.2vw,622px)}
 .polaroid{position:absolute;width:min(18.96vw,273px);height:min(22.3vw,321px);background:#fff;padding:min(.9vw,13px) min(.9vw,13px) min(3.3vw,48px);box-shadow:0 10px 30px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.08)}
@@ -313,7 +353,9 @@ footer .cols a:hover{color:#fff}
   .blk{padding-top:80px}
   .out-cards,.decisions{grid-template-columns:1fr}
   .compare{grid-template-columns:1fr}.compare .arrow{transform:rotate(90deg);justify-self:center}
-  .stat{flex-direction:column;gap:10px}
+  .stat-top{flex-direction:column;gap:10px}
+  .people{gap:6px}.people i{width:18px;height:30px}
+  .flip-card{height:210px}
   .takeaways li{padding-left:44px}
   .lately{height:60vw}
   footer .in{flex-direction:column;padding:44px 20px 36px}
