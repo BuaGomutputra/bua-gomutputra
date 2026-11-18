@@ -233,7 +233,7 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .back-btn:hover span{transform:translateX(-4px)}
 
 /* SideBy: compact thank-you card */
-.thanks{position:relative;overflow:hidden;margin-top:104px;border-radius:16px;padding:44px 48px;display:flex;align-items:center;gap:40px;color:#FAF5EB;background:radial-gradient(ellipse at 30% 70%,#3A33A0 0%,#16133F 60%,#0B0A24 100%)}
+.thanks{position:relative;overflow:hidden;margin:104px 0 0;border-radius:16px;padding:44px 48px;display:flex;align-items:center;gap:40px;color:#FAF5EB;background:radial-gradient(ellipse at 30% 70%,#3A33A0 0%,#16133F 60%,#0B0A24 100%)}
 .thanks::after{content:"";position:absolute;right:-10%;bottom:-60%;width:60%;height:120%;background:#6B5CF2;opacity:.35;filter:blur(90px);border-radius:50%;pointer-events:none}
 .thanks .mark{width:150px;flex:none;position:relative;z-index:1;filter:drop-shadow(0 0 30px rgba(153,140,255,.5));will-change:transform}
 .thanks div{position:relative;z-index:1}
@@ -248,6 +248,12 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .fin-grid img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px}
 .fin-grid figcaption{font-size:15px;font-weight:500;color:var(--soft);margin-top:10px}
 .fin-grid figcaption b{color:var(--ink);margin-right:6px}
+
+/* SideBy: next project sits lower and smaller, under the content column */
+.cs2 .next-proj{max-width:none;margin:0;padding:min(11vw,160px) max(32px,min(8.89vw,128px)) min(9.7vw,140px) calc(max(20px,min(8.89vw,128px)) + 170px + 48px)}
+.cs2 .next-proj>*{max-width:960px}
+.cs2 .next-proj h3{font-size:max(22px,min(1.94vw,28px));margin:8px 0 18px}
+.cs2 .next-proj .tile{width:min(100%,560px);aspect-ratio:16/9}
 
 /* SideBy interactions */
 .has-pill [data-pill],.has-pill [data-pill] *{cursor:none}
@@ -267,12 +273,12 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .stat{flex-direction:column;align-items:stretch;gap:18px}
 .problem-row{display:grid;grid-template-columns:497fr 425fr;column-gap:38px;align-items:start}
 .problem-row .prose{padding-top:20px}
-.problem-row .prose p+p{margin-top:28px}
+.problem-row .prose p+p{margin-top:20px}
 .stat-v{margin:0;padding:29px;gap:0;max-width:none}
 .stat-v>b{display:block}
 .stat-v .people{margin-top:4px}
 .stat-v>p{margin-top:28px}
-.problem-row+figure{margin-top:min(13.9vw,200px)}
+.problem-row+figure{margin-top:min(5vw,72px)}
 .stat-top{display:flex;gap:24px;align-items:baseline}
 .people{display:flex;gap:10px}
 .people i{width:22px;height:36px;display:block}
@@ -399,6 +405,7 @@ footer .cols a:hover{color:#fff}
   .takeaways li{padding-left:44px}
   .thanks{flex-direction:column;align-items:flex-start;gap:22px;padding:32px 26px}.thanks .mark{width:110px}
   .fin-grid{grid-template-columns:1fr}
+  .cs2 .next-proj{padding:96px 20px 72px}.cs2 .next-proj .tile{width:100%}
   .lately{height:60vw}
   footer .in{flex-direction:column;padding:44px 20px 36px}
   footer .upd{margin-top:28px}footer .cols h5,footer .cols a{margin-bottom:10px}
