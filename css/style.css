@@ -265,7 +265,14 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .decisions.tilt-group>div::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(91,75,214,.12),transparent 60%)}
 .tilt-group>div:hover::after{opacity:1}
 .stat{flex-direction:column;align-items:stretch;gap:18px}
-.stat+figure{margin-top:20px}
+.problem-row{display:grid;grid-template-columns:497fr 425fr;column-gap:38px;align-items:start}
+.problem-row .prose{padding-top:20px}
+.problem-row .prose p+p{margin-top:28px}
+.stat-v{margin:0;padding:29px;gap:0;max-width:none}
+.stat-v>b{display:block}
+.stat-v .people{margin-top:4px}
+.stat-v>p{margin-top:28px}
+.problem-row+figure{margin-top:min(13.9vw,200px)}
 .stat-top{display:flex;gap:24px;align-items:baseline}
 .people{display:flex;gap:10px}
 .people i{width:22px;height:36px;display:block}
@@ -386,6 +393,7 @@ footer .cols a:hover{color:#fff}
   .out-cards,.decisions{grid-template-columns:1fr}
   .compare{grid-template-columns:1fr}.compare .arrow{transform:rotate(90deg);justify-self:center}
   .stat-top{flex-direction:column;gap:10px}
+  .problem-row{grid-template-columns:1fr;row-gap:28px}.problem-row .prose{padding-top:0}.problem-row+figure{margin-top:64px}
   .people{gap:6px}.people i{width:18px;height:30px}
   .flip-card{height:210px}
   .takeaways li{padding-left:44px}
