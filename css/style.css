@@ -285,7 +285,7 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .step-head h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
 .mine{font-style:normal;font-family:var(--mono);font-size-adjust:.5;font-size:14px;font-weight:400;color:var(--duo-dk);background:var(--lav);padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:3px}
 .steps figure{margin-top:22px}
-.theme-duo #takeaways figure{max-width:620px;margin-top:28px}
+.theme-duo #takeaways figure{max-width:620px;margin-top:32px}
 .theme-duo .quote{border-left-color:var(--duo);color:#2B3A20}
 /* ===== EcoPinet case study: pineapple-leaf green + kraft brown ===== */
 .theme-eco.cs2{--accent:#3F7D2E;--deep:#1E3B25;--lav:#EEF6E2;--lav2:#CBE6AE;--duo:#5E9E3A;--duo-dk:#467A2A;--mint:#B6EE8C;--kraft:#FFF5D1;--sun:#FFD95A}
@@ -1044,4 +1044,108 @@ footer .cols a:hover{color:#fff}
   .av-tabs{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory}
   .av-tabs button{flex:0 0 72%;scroll-snap-align:start}
   .av-stage{min-height:0}
+}
+
+/* ===== One spacing system for every case study =====
+   section → section 96px · block → block 32px · label→H2 10px · H2→content 20px
+   sub-labels 48px above / 16px below · notes and captions sit 14px under what they describe */
+.cs2 .cs-landing{padding-bottom:0;margin-bottom:0}
+.cs2 .cs-landing>:last-child{margin-bottom:0}
+.cs2 .cs-main>.blk{padding-top:96px;margin-top:0}
+.cs2 .cs-main>.blk>*{margin-top:0;margin-bottom:0}
+.cs2 .cs-main>.blk>*+*{margin-top:32px}
+.cs2 .cs-main>.blk>.lab+h2{margin-top:10px}
+.cs2 .cs-main>.blk>h2+*{margin-top:20px}
+.cs2 .cs-main>.blk>.sub-lab,.cs2 .cs-main>.blk>.fin-lab,.cs2 .cs-main>.blk>.sub{margin-top:48px}
+.cs2 .cs-main>.blk>.sub-lab+*,.cs2 .cs-main>.blk>.fin-lab+*,.cs2 .cs-main>.blk>.sub+*{margin-top:16px}
+.cs2 .cs-main>.blk>.note,.cs2 .cs-main>.blk>.figcap{margin-top:14px}
+.cs2 .cs-main>.blk.more>.lab+h2{margin-top:36px}
+@media (max-width:760px){
+  .cs2 .cs-main>.blk{padding-top:72px}
+  .cs2 .cs-main>.blk>*+*{margin-top:24px}
+  .cs2 .cs-main>.blk>.sub-lab,.cs2 .cs-main>.blk>.fin-lab,.cs2 .cs-main>.blk>.sub{margin-top:40px}
+}
+
+/* BuzzTile v3 */
+.brief i{width:34px;height:31px;display:grid;place-items:center;font-style:normal;font-size:14px;font-weight:600;color:var(--deep);background:var(--lav2)!important}
+.brief i::after{display:none}
+.brief.seen i{background:var(--ok)!important;color:#fff}
+.brief li{padding-top:64px}
+.brief i{transition:background .4s,color .4s}
+.brief.seen li:nth-child(2) i{transition-delay:.25s}.brief.seen li:nth-child(3) i{transition-delay:.5s}.brief.seen li:nth-child(4) i{transition-delay:.75s}
+/* tech matrix */
+.matrix{max-width:760px}
+.matrix table{width:100%;border-collapse:separate;border-spacing:0;font-size:15px;background:#fff;border-radius:14px;box-shadow:0 0 0 1px rgba(20,20,20,.08);overflow:hidden}
+.matrix th,.matrix td{padding:11px 12px;text-align:center}
+.matrix thead th{font-family:var(--mono);font-size-adjust:.5;font-size:12.5px;font-weight:400;color:var(--accent);line-height:1.3;border-bottom:1px solid rgba(20,20,20,.08)}
+.matrix tbody th{text-align:left;font-weight:500;white-space:nowrap}
+.matrix tbody tr+tr>*{border-top:1px solid rgba(20,20,20,.06)}
+.matrix tbody tr{transition:background .2s}
+.matrix tbody tr:hover{background:#FFFBEF}
+.matrix tr.pick{background:var(--lav)}
+.matrix tr.pick th{font-weight:600}
+.matrix th em{font-style:normal;font-family:var(--mono);font-size-adjust:.5;font-size:11.5px;color:#fff;background:var(--ok);padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:1px}
+.matrix td{font-size:0}
+.matrix td::before{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;color:#fff}
+.matrix td.y::before{content:"✓";background:var(--ok)}
+.matrix td.n::before{content:"✕";background:#E9C9C2;color:#9B3324}
+.matrix-note{font-size:14px;color:var(--soft);margin-top:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* rounds: progress, stack hint, controls */
+.r-tabs{align-items:center}
+.r-tabs button{position:relative;overflow:hidden}
+.r-tabs button::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--honey)}
+.rounds.auto .r-tabs button.run::after{animation:rprog var(--rt,7s) linear forwards}
+.rounds:hover .r-tabs button.run::after{animation-play-state:paused}
+@keyframes rprog{to{width:100%}}
+.r-nav{margin-left:auto;display:flex;align-items:center;gap:12px}
+.r-count{font-family:var(--mono);font-size-adjust:.5;font-size:13px;font-weight:400;color:var(--soft)}
+.r-next{font:inherit;font-size:14.5px;font-weight:600;color:var(--deep);background:var(--honey);border:0;border-radius:999px;padding:8px 16px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.r-next:hover{transform:translateX(3px)}
+.r-panel figure{position:relative}
+.r-panel figure::before,.r-panel figure::after{content:"";position:absolute;inset:0;border-radius:12px;background:#fff;box-shadow:0 0 0 1px rgba(20,20,20,.08);z-index:-1}
+.r-panel figure::before{transform:translate(10px,10px) rotate(1.2deg)}
+.r-panel figure::after{transform:translate(20px,20px) rotate(2.4deg);opacity:.7}
+.r-panel[data-last] figure::after{display:none}
+.r-panel:last-of-type figure::before,.r-panel:last-of-type figure::after{display:none}
+.rounds{isolation:isolate;padding-bottom:12px}
+.r-panel figure img{cursor:pointer}
+/* CAD: same size side by side */
+.cad-row{grid-template-columns:1fr 1fr}
+.cad-row img{aspect-ratio:16/10;object-fit:contain;background:#1F1F1F}
+.cad-row figure:last-child img{background:#fff}
+/* app viewer: numbered tabs, sketch and screen the same height */
+.av-tabs b em{font-style:normal;display:inline-grid;place-items:center;width:24px;height:22px;margin-right:10px;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);background:var(--lav2);font-size:12.5px;vertical-align:2px}
+.av-tabs button[aria-selected=true] b em{background:var(--honey)}
+.av-stage{gap:22px}
+.av-sketch,.av-phone{width:auto}
+.av-sketch{transform:none}
+.av-stage.swap .av-sketch{transform:translateY(10px)}
+.av-sketch img,.av-phone img{height:min(440px,52vw);width:auto;max-width:100%;object-fit:contain}
+.av-sketch img{border-radius:8px}
+/* system architecture, rebuilt */
+.flow{border-radius:20px;background:var(--deep);color:#F4EEDD;padding:26px 26px 28px}
+.flow-lab{color:var(--honey)!important;margin-bottom:18px}
+.flow-cols{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:start}
+.fcol{display:flex;flex-direction:column;align-items:stretch}
+.fhead{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;margin-bottom:12px;color:#fff}
+.fhead span{width:24px;height:22px;display:grid;place-items:center;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);background:var(--honey);color:var(--deep);font-size:12px}
+.fn{font-size:13.5px;line-height:1.35;text-align:center;padding:10px 10px;border-radius:10px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);transition:background .3s,box-shadow .3s,color .3s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.fn.key{background:rgba(246,185,43,.16);box-shadow:inset 0 0 0 1px rgba(246,185,43,.45);font-weight:600;color:#FFE3A3}
+.fn.esp{background:#C9332B;box-shadow:none;color:#fff}
+.fn.lit{background:var(--honey);color:var(--deep);box-shadow:0 0 0 3px rgba(246,185,43,.25),0 0 24px rgba(246,185,43,.45);transform:scale(1.03)}
+.fsplit{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.fa{display:block;width:2px;height:14px;margin:3px auto;background:rgba(255,255,255,.3);position:relative}
+.fa::after{content:"";position:absolute;left:-4px;bottom:-3px;border:5px solid transparent;border-top-color:rgba(255,255,255,.45);border-bottom:0}
+.fbridge{align-self:center;height:2px;margin-top:40px;background:rgba(255,255,255,.3);position:relative}
+.fbridge::after{content:"";position:absolute;right:-2px;top:-5px;border:6px solid transparent;border-left-color:rgba(255,255,255,.45);border-right:0}
+/* quieter closing line */
+.closing{max-width:680px;font-size:17px;line-height:1.6;color:var(--soft);padding-left:18px;border-left:2px solid var(--lav2)}
+@media (max-width:900px){
+  .flow-cols{grid-template-columns:1fr;gap:6px}
+  .fbridge{width:2px;height:22px;margin:4px auto}
+  .fbridge::after{right:-5px;top:auto;bottom:-2px;border:6px solid transparent;border-top-color:rgba(255,255,255,.45);border-bottom:0}
+  .cad-row{grid-template-columns:1fr}
+  .matrix{overflow-x:auto}.matrix table{min-width:520px}
+  .r-nav{margin-left:0;width:100%}
 }

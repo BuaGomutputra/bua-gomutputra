@@ -7,7 +7,7 @@
 <meta name="description" content="BuzzTile: a honeycomb floor tile that turns footsteps into renewable energy, with a gamified app that makes it visible. Solo EPQ project.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;700&family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=1795044559">
+<link rel="stylesheet" href="css/style.css?v=1795045046">
 </head>
 <body class="theme-buzz cs2">
 <div class="sheet">
@@ -67,10 +67,10 @@
     </div>
     <p class="lab sub-lab">MY DESIGN BRIEF</p>
     <ol class="brief">
-      <li><i aria-hidden="true"></i><b>Make energy from footsteps</b><span>Convert steps into measurable electrical energy.</span></li>
-      <li><i aria-hidden="true"></i><b>Show it in real time</b><span>Detect each step and display the data instantly.</span></li>
-      <li><i aria-hidden="true"></i><b>Easy and fun to use</b><span>An engaging, intuitive interface for ages 6–18.</span></li>
-      <li><i aria-hidden="true"></i><b>Spark curiosity</b><span>Get people asking questions about sustainability.</span></li>
+      <li><i aria-hidden="true">1</i><b>Make energy from footsteps</b><span>Convert steps into measurable electrical energy.</span></li>
+      <li><i aria-hidden="true">2</i><b>Show it in real time</b><span>Detect each step and display the data instantly.</span></li>
+      <li><i aria-hidden="true">3</i><b>Easy and fun to use</b><span>An engaging, intuitive interface for ages 6–18.</span></li>
+      <li><i aria-hidden="true">4</i><b>Spark curiosity</b><span>Get people asking questions about sustainability.</span></li>
     </ol>
   </section>
 
@@ -95,19 +95,17 @@
       </div>
     </div>
     <p class="lab sub-lab">FOUR WAYS TO TURN STEPS INTO ENERGY</p>
-    <div class="tech" aria-label="Energy harvesting technologies compared">
-      <div class="tech-tabs" role="tablist">
-        <button role="tab" aria-selected="true" data-t="0">Piezoelectric <em>✓ chosen</em></button>
-        <button role="tab" aria-selected="false" data-t="1">Electromagnetic</button>
-        <button role="tab" aria-selected="false" data-t="2">Pneumatic</button>
-        <button role="tab" aria-selected="false" data-t="3">Quantum tunnelling</button>
-      </div>
-      <div class="tech-panels">
-        <div class="tp on"><p class="how">Pressing a crystal turns stress straight into charge.</p><ul class="yn"><li class="y">No moving parts</li><li class="y">Small and cheap</li><li class="y">Well documented</li><li class="n">Wears down under heavy impact</li></ul></div>
-        <div class="tp"><p class="how">A step moves a magnet past a coil. How Pavegen’s tiles work.</p><ul class="yn"><li class="y">Proven in public spaces</li><li class="n">Lots of mechanical parts</li><li class="n">Expensive to install</li></ul></div>
-        <div class="tp"><p class="how">Steps compress air, which drives a generator.</p><ul class="yn"><li class="y">Highest efficiency</li><li class="n">Bulky pumps</li><li class="n">Too complex for a prototype</li></ul></div>
-        <div class="tp"><p class="how">Pressure lets electrons jump an insulating barrier.</p><ul class="yn"><li class="y">Great pressure sensor</li><li class="n">Only microvolts of power</li></ul></div>
-      </div>
+    <div class="matrix">
+      <table>
+        <thead><tr><th scope="col"><span class="sr">Technology</span></th><th scope="col">No moving parts</th><th scope="col">Low cost</th><th scope="col">Enough power</th><th scope="col">Easy to prototype</th></tr></thead>
+        <tbody>
+          <tr class="pick"><th scope="row">Piezoelectric <em>chosen</em></th><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+          <tr><th scope="row">Electromagnetic</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td><td class="n">No</td></tr>
+          <tr><th scope="row">Pneumatic</th><td class="n">No</td><td class="n">No</td><td class="y">Yes</td><td class="n">No</td></tr>
+          <tr><th scope="row">Quantum tunnelling</th><td class="y">Yes</td><td class="n">No</td><td class="n">No</td><td class="n">No</td></tr>
+        </tbody>
+      </table>
+      <p class="matrix-note">The catch: piezos wear down under heavy impact (more in Takeaways).</p>
     </div>
     <p class="callout">Every piezo circuit I found only <b>measured</b> power. None gave people anything to interact with. So: keep the proven circuit, and add a reason to keep stepping.</p>
   </section>
@@ -117,11 +115,12 @@
     <p class="lab">04 · IDEATION</p>
     <h2>Three rounds to a honeycomb</h2>
     <div class="prose"><p>Lots of trial and error. The honeycomb won because it can keep growing, and because one bee can’t do much, but a hive can.</p></div>
-    <div class="rounds">
+    <div class="rounds" data-auto="7000">
       <div class="r-tabs" role="tablist">
         <button role="tab" aria-selected="true" data-r="0"><span>1</span>Initial ideas</button>
         <button role="tab" aria-selected="false" data-r="1"><span>2</span>Piezo mat designs</button>
         <button role="tab" aria-selected="false" data-r="2"><span>3</span>Honeycomb <em>✓</em></button>
+        <div class="r-nav"><b class="r-count">1 / 3</b><button type="button" class="r-next">Next round →</button></div>
       </div>
       <div class="r-panel on">
         <figure><img src="images/buzztile/ideas-initial.jpg" alt="Early sketches of piezo mat layouts with notes" data-label="ideas-initial.jpg"></figure>
@@ -207,10 +206,10 @@
     <div class="prose"><p>A number on an LCD isn’t very exciting. Feedback and rewards keep people motivated, so I sketched an app around them, then built it. Click through the screens:</p></div>
     <div class="appview">
       <div class="av-tabs" role="tablist">
-        <button role="tab" aria-selected="true" data-a="0"><b>Hive</b><span>Steps and volts, live. The hive grows a new chamber as the school walks.</span></button>
-        <button role="tab" aria-selected="false" data-a="1"><b>Learning hub</b><span>Fun facts unlock as you walk, with links to real articles and videos.</span></button>
-        <button role="tab" aria-selected="false" data-a="2"><b>Bee collection</b><span>13 bees, from common Worker Bees to legendary ones hidden until 5,000 steps.</span></button>
-        <button role="tab" aria-selected="false" data-a="3"><b>School stats</b><span>Daily, weekly and monthly totals for the whole school. A team effort.</span></button>
+        <button role="tab" aria-selected="true" data-a="0"><b><em>1</em>Hive</b><span>Steps and volts, live. The hive grows a new chamber as the school walks.</span></button>
+        <button role="tab" aria-selected="false" data-a="1"><b><em>2</em>Learning hub</b><span>Fun facts unlock as you walk, with links to real articles and videos.</span></button>
+        <button role="tab" aria-selected="false" data-a="2"><b><em>3</em>Bee collection</b><span>13 bees, from common Worker Bees to legendary ones hidden until 5,000 steps.</span></button>
+        <button role="tab" aria-selected="false" data-a="3"><b><em>4</em>School stats</b><span>Daily, weekly and monthly totals for the whole school. A team effort.</span></button>
       </div>
       <div class="av-stage">
         <figure class="av-sketch"><img src="images/buzztile/sketch-1.jpg" alt="Hand-drawn sketch of this screen"><figcaption>Sketch</figcaption></figure>
@@ -218,7 +217,19 @@
         <figure class="av-phone"><img src="images/buzztile/screen-1.jpg" alt="Final app screen"><figcaption>Final</figcaption></figure>
       </div>
     </div>
-    <figure class="arch"><img src="images/buzztile/architecture.jpg" alt="System architecture diagram: floor mat to ESP32 to API to web app" data-label="architecture.jpg"><figcaption>The plan: how a step travels from the tile to the screen.</figcaption></figure>
+    <div class="flow" aria-label="System architecture: how a step travels from the tile to the app">
+      <p class="lab flow-lab">THE PLAN · SYSTEM ARCHITECTURE</p>
+      <div class="flow-cols">
+        <div class="fcol"><p class="fhead"><span>1</span>The tile</p>
+          <div class="fn key">Piezoelectric floor mat</div><i class="fa"></i><div class="fn">Voltage changes and spikes</div><i class="fa"></i><div class="fn">Step count +1</div></div>
+        <div class="fbridge" aria-hidden="true"></div>
+        <div class="fcol"><p class="fhead"><span>2</span>The brain</p>
+          <div class="fn key esp">ESP32</div><i class="fa"></i><div class="fsplit"><div class="fn">Step count change</div><div class="fn">Voltage change</div></div><i class="fa"></i><div class="fn key">API</div><i class="fa"></i><div class="fn">Reads and writes Excel via React-Excel</div></div>
+        <div class="fbridge" aria-hidden="true"></div>
+        <div class="fcol"><p class="fhead"><span>3</span>The app</p>
+          <div class="fn key">Web app</div><i class="fa"></i><div class="fn">Hosted at www.rtx.com</div><i class="fa"></i><div class="fn">Increments the counter</div><i class="fa"></i><div class="fn key">Webhook update</div><i class="fa"></i><div class="fn">Frontend</div></div>
+      </div>
+    </div>
     <div class="prose"><p>My first time connecting hardware to a front end. I learned from YouTube and short online courses, then built it with HTML, CSS Grid and JavaScript. The DOM updates the screen whenever a step lands, and localStorage keeps the data after a refresh.</p></div>
   </section>
 
@@ -249,7 +260,7 @@
       <li><b>Know your limits, then design around them.</b> Piezo sensors aren’t made for constant heavy impact. Mine started at 3–5 volts a step and dropped noticeably in just three months.</li>
       <li><b>Next: full size, real hallways.</b> Tougher materials or a hybrid system, then a full-scale test in a school corridor. Done properly, I can see it in schools, parks and airports.</li>
     </ol>
-    <blockquote class="quote">“Design isn’t just about solving problems. It’s about reimagining systems, connecting people, and making invisible forces like energy and climate visible and human.”</blockquote>
+    <p class="closing">This project changed how I see design: it isn’t just about solving problems, but about reimagining systems, connecting people, and making invisible things like energy and climate visible and human.</p>
   </section>
 
   <!-- 10 More work -->
@@ -284,6 +295,6 @@
     </div>
   </div>
 </footer>
-<script src="js/main.js?v=1795044488"></script>
+<script src="js/main.js?v=1795045046"></script>
 </body>
 </html>

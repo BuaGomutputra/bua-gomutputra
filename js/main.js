@@ -592,11 +592,32 @@ if (play) {
   });
 }
 
-// BuzzTile: ideation rounds
+// BuzzTile: ideation rounds. Auto-advances (with a progress bar) until someone clicks.
 document.querySelectorAll('.rounds').forEach(r => {
-  const tabs = [...r.querySelectorAll('[data-r]')], ps = [...r.querySelectorAll('.r-panel')];
-  tabs.forEach(b => b.addEventListener('click', () => { tabs.forEach(x => x.setAttribute('aria-selected', x === b)); ps.forEach((p, i) => p.classList.toggle('on', i === +b.dataset.r)); }));
+  const tabs = [...r.querySelectorAll('[data-r]')], ps = [...r.querySelectorAll('.r-panel')], count = r.querySelector('.r-count');
+  let cur = 0, auto = !reduce;
+  r.style.setProperty('--rt', (+r.dataset.auto || 7000) + 'ms');
+  const go = i => {
+    cur = (i + tabs.length) % tabs.length;
+    tabs.forEach((x, k) => { x.setAttribute('aria-selected', k === cur); x.classList.remove('run'); });
+    ps.forEach((p, k) => p.classList.toggle('on', k === cur));
+    if (count) count.textContent = `${cur + 1} / ${tabs.length}`;
+    if (auto) { void tabs[cur].offsetWidth; tabs[cur].classList.add('run'); }
+  };
+  const stop = () => { auto = false; r.classList.remove('auto'); tabs.forEach(x => x.classList.remove('run')); };
+  tabs.forEach((b, i) => { b.addEventListener('click', () => { stop(); go(i); }); b.addEventListener('animationend', () => { if (auto) go(cur + 1); }); });
+  r.querySelector('.r-next')?.addEventListener('click', () => { stop(); go(cur + 1); });
+  ps.forEach(p => p.querySelector('img')?.addEventListener('click', () => { stop(); }));
+  if (auto) new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { r.classList.add('auto'); go(cur); o.disconnect(); } }), { threshold: .5 }).observe(r);
 });
+
+// BuzzTile: system architecture lights up step by step, like a signal travelling through it
+const flow = document.querySelector('.flow');
+if (flow && !reduce) {
+  const nodes = [...flow.querySelectorAll('.fn')]; let k = 0, t = null;
+  const tick = () => { nodes.forEach(n => n.classList.remove('lit')); nodes[k].classList.add('lit'); if (nodes[k].parentElement.classList.contains('fsplit')) { nodes[k + 1].classList.add('lit'); k++; } k = (k + 1) % (nodes.length + 2); if (k >= nodes.length) k = 0; };
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !t) t = setInterval(tick, 650); else if (!e.isIntersecting && t) { clearInterval(t); t = null; } }), { threshold: .3 }).observe(flow);
+}
 
 // BuzzTile: press-and-hold piezo demo
 const pz = document.querySelector('.pz');
