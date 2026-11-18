@@ -46,6 +46,47 @@ if (clock) {
   tick(); setInterval(tick, 30000);
 }
 
+// Pixel reveal: images start as blurred squares and sharpen on hover (phones: on scroll)
+const hoverable = matchMedia('(hover: hover)').matches;
+document.querySelectorAll('.slot img').forEach(img => {
+  const slot = img.closest('.slot');
+  const cv = document.createElement('canvas'); cv.className = 'px'; slot.appendChild(cv);
+  const ctx = cv.getContext('2d');
+  let anim, size = 28;
+  const draw = block => {
+    const r = slot.getBoundingClientRect(); if (!r.width || !img.naturalWidth) return;
+    const W = Math.round(r.width), H = Math.round(r.height);
+    cv.width = W; cv.height = H;
+    const sw = Math.max(1, Math.ceil(W / block)), sh = Math.max(1, Math.ceil(H / block));
+    const off = document.createElement('canvas'); off.width = sw; off.height = sh;
+    const o = off.getContext('2d');
+    const cs = getComputedStyle(img), iw = img.naturalWidth, ih = img.naturalHeight;
+    const pos = cs.objectPosition.split(' ').map(v => v.endsWith('%') ? parseFloat(v) / 100 : (v === 'left' || v === 'top' ? 0 : v === 'right' || v === 'bottom' ? 1 : .5));
+    o.fillStyle = cs.backgroundColor && cs.backgroundColor !== 'rgba(0, 0, 0, 0)' ? cs.backgroundColor : '#ECECEC';
+    o.fillRect(0, 0, sw, sh);
+    if (cs.objectFit === 'contain') {
+      const s = Math.min(sw / iw, sh / ih); o.drawImage(img, (sw - iw * s) * pos[0], (sh - ih * s) * (pos[1] ?? .5), iw * s, ih * s);
+    } else {
+      const s = Math.max(W / iw, H / ih), cw = W / s, ch = H / s;
+      o.drawImage(img, (iw - cw) * pos[0], (ih - ch) * (pos[1] ?? .5), cw, ch, 0, 0, sw, sh);
+    }
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(off, 0, 0, sw, sh, 0, 0, sw * block, sh * block);
+  };
+  const ready = () => { draw(size); };
+  img.complete ? ready() : img.addEventListener('load', ready);
+  addEventListener('resize', () => { if (!cv.classList.contains('gone')) draw(size); });
+  const reveal = () => {
+    cancelAnimationFrame(anim); const steps = [16, 9, 5, 3]; let k = 0, t0 = 0;
+    const tick = t => { if (!t0) t0 = t; if (t - t0 > 70) { t0 = t; if (k < steps.length) draw(steps[k++]); else { cv.classList.add('gone'); return; } } anim = requestAnimationFrame(tick); };
+    anim = requestAnimationFrame(tick);
+  };
+  const hide = () => { cancelAnimationFrame(anim); draw(size); cv.classList.remove('gone'); };
+  if (reduce) { cv.classList.add('gone'); return; }
+  if (hoverable) { slot.addEventListener('mouseenter', reveal); slot.addEventListener('mouseleave', hide); slot.addEventListener('focus', reveal); slot.addEventListener('blur', hide); }
+  else new IntersectionObserver((es, ob) => es.forEach(e => { if (e.isIntersecting) { setTimeout(reveal, 250); ob.unobserve(slot); } }), { threshold: .6 }).observe(slot);
+});
+
 // Home status line: live LA time
 const la = document.querySelector('[data-la]');
 if (la) {
