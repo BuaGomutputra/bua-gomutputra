@@ -324,12 +324,15 @@ if (document.body.classList.contains('cs2')) {
     const set = st => { flip.dataset.state = st; flip.querySelectorAll('[data-to]').forEach(b => b.setAttribute('aria-selected', b.dataset.to === st)); };
     flip.querySelectorAll('[data-to]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); set(b.dataset.to); }));
     flip.querySelector('.flip-card').addEventListener('click', () => set(flip.dataset.state === 'before' ? 'after' : 'before'));
+    flip.querySelector('.flip-card').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(flip.dataset.state === 'before' ? 'after' : 'before'); } });
+    // when it first scrolls into view: a little wiggle, then it flips to SideBy on its own so people see it's interactive
+    if (!reduce) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); flip.classList.add('nudge'); setTimeout(() => { flip.classList.remove('nudge'); set('after'); }, 1400); } }, { threshold: .7 }).observe(flip);
   }
   // reading progress line next to the contents list
   const toc = document.querySelector('.toc');
   if (toc) { const prog = () => toc.style.setProperty('--p', Math.min(1, scrollY / (document.documentElement.scrollHeight - innerHeight))); addEventListener('scroll', prog, { passive: true }); prog(); }
   // ending logo drifts with the mouse
-  const mark = document.querySelector('.cs2 .ending .mark'), end = document.querySelector('.cs2 .ending');
+  const mark = document.querySelector('.thanks .mark'), end = document.querySelector('.thanks');
   if (mark && !reduce && matchMedia('(hover: hover)').matches) end.addEventListener('pointermove', e => {
     const r = end.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
     mark.style.translate = `${x * 30}px ${y * 20}px`; mark.style.rotate = `${x * 6}deg`;
