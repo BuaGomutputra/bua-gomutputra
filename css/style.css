@@ -5,7 +5,7 @@
   --pad:120px; --max:1440px;
   --font:"Geist",system-ui,-apple-system,sans-serif;
   --mono:"Goudy Bookletter 1911",Georgia,serif;
-  --kiwi:"Kiwi Maru",Georgia,serif;
+  --kiwi:"Goudy Bookletter 1911",Georgia,serif;
   --noise:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 .theme-duo{ --accent:#2B7A00; --box:#F1F9E9; }
@@ -94,7 +94,7 @@ a.slot:focus-visible .tag{opacity:1;transform:none}
 .cs-head{padding:88px var(--pad) 28px;max-width:var(--max);margin:0 auto}
 .eyebrow{font-family:var(--mono);font-size-adjust:.5;font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--accent)}
 .cs-head h1{font-size:clamp(40px,5vw,72px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin:14px 0}
-.cs-head .lede{font-family:var(--kiwi);font-size:clamp(18px,1.6vw,22px);line-height:1.4;color:var(--soft);max-width:900px}
+.cs-head .lede{font-family:var(--kiwi);font-size-adjust:.5;font-size:clamp(18px,1.6vw,22px);line-height:1.4;color:var(--soft);max-width:900px}
 .cs-head .lede em{font-style:normal;color:var(--accent)}
 .overview{max-width:var(--max);margin:32px auto 64px;padding:0 var(--pad)}
 .overview .box{background:var(--box);border-radius:12px;padding:44px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px}
@@ -173,7 +173,7 @@ a.slot:focus-visible .tag{opacity:1;transform:none}
 .cs-landing{padding-top:88px}
 .cs-landing .eyebrow{color:var(--accent)}
 .cs-landing h1{font-size:clamp(44px,5vw,72px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin:14px 0 16px}
-.cs-landing .lede{font-family:var(--kiwi);font-size:clamp(18px,1.6vw,22px);line-height:1.45;color:var(--soft);max-width:720px}
+.cs-landing .lede{font-family:var(--kiwi);font-size-adjust:.5;font-size:clamp(18px,1.6vw,22px);line-height:1.45;color:var(--soft);max-width:720px}
 .cs-landing .lede em{font-style:normal;color:var(--accent)}
 .hero-img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px;margin-top:40px}
 .facts{display:grid;grid-template-columns:1fr 1fr 1fr 1.6fr;gap:28px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(20,20,20,.1)}
@@ -201,7 +201,7 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .stat small{display:block;font-family:var(--mono);font-size-adjust:.5;font-size:12px;color:var(--muted);margin-top:6px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .chips span{font-family:var(--mono);font-size-adjust:.5;font-size:13px;padding:7px 12px;border-radius:999px;background:var(--lav);color:var(--accent)}
-.quote{font-family:var(--kiwi);font-size:clamp(20px,1.9vw,26px);line-height:1.4;color:var(--deep);border-left:3px solid var(--accent);padding:4px 0 4px 24px;margin:28px 0;max-width:720px}
+.quote{font-family:var(--kiwi);font-size-adjust:.5;font-size:clamp(20px,1.9vw,26px);line-height:1.4;color:var(--deep);border-left:3px solid var(--accent);padding:4px 0 4px 24px;margin:28px 0;max-width:720px}
 .quote cite{display:block;font-family:var(--mono);font-size-adjust:.5;font-style:normal;font-size:12px;color:var(--muted);margin-top:10px}
 .decisions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
 .decisions div{background:#fff;border:1px solid rgba(91,75,214,.16);border-radius:12px;padding:24px 26px}
@@ -226,7 +226,7 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .takeaways li::before{content:"0" counter(t);position:absolute;left:0;top:20px;font-family:var(--mono);font-size-adjust:.5;font-size:13px;color:var(--accent)}
 .takeaways b{display:block;color:var(--ink);font-size:19px;font-weight:600;margin-bottom:4px}
 .cs2 .ending{margin-top:120px}
-.cs2 .ending .next{font-family:var(--kiwi);font-size:20px}
+.cs2 .ending .next{font-family:var(--kiwi);font-size-adjust:.5;font-size:20px}
 
 /* SideBy interactions */
 .has-pill [data-pill],.has-pill [data-pill] *{cursor:none}
