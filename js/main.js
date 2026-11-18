@@ -146,3 +146,18 @@ if (slots.length && !reduce && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); setTimeout(() => e.target.style.transitionDelay = '', 1200); } }), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
   slots.forEach(s => io.observe(s));
 }
+
+// Home swirls follow the mouse: they drift, tilt and stretch as you move left and right
+const swL = document.querySelector('.sw-l'), swR = document.querySelector('.sw-r');
+if (swL && swR && !reduce && matchMedia('(hover: hover)').matches) {
+  let tx = 0, ty = 0, x = 0, y = 0;
+  addEventListener('pointermove', e => { tx = e.clientX / innerWidth * 2 - 1; ty = e.clientY / innerHeight * 2 - 1; }, { passive: true });
+  document.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
+  const loop = () => {
+    x += (tx - x) * .06; y += (ty - y) * .06;
+    swL.style.transform = `translate(${x * -46}px, ${y * 18}px) rotate(${x * 7}deg) scale(${1 + Math.abs(x) * .06}, ${1 - Math.abs(x) * .03})`;
+    swR.style.transform = `translate(${x * 60}px, ${y * -14}px) rotate(${x * -5}deg) scale(${1 + Math.abs(x) * .05}, ${1 + y * .04})`;
+    requestAnimationFrame(loop);
+  };
+  loop();
+}
