@@ -172,7 +172,7 @@ if (projTiles.length && matchMedia('(hover: hover)').matches) {
   pill.innerHTML = '<svg viewBox="0 0 108 136" aria-hidden="true"><path d="M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z"/></svg><span></span>';
   document.body.appendChild(pill);
   const label = pill.querySelector('span');
-  addEventListener('pointermove', e => { pill.style.transform = `translate3d(${e.clientX - 13}px, ${e.clientY - 4}px, 0)`; }, { passive: true });
+  addEventListener('pointermove', e => { pill.style.transform = `translate3d(${e.clientX - 9}px, ${e.clientY - 12}px, 0)`; }, { passive: true });
   projTiles.forEach(t => {
     const name = t.querySelector('.tag b')?.textContent || t.querySelector('img')?.alt || 'project';
     t.addEventListener('pointerenter', () => { label.textContent = t.dataset.pill || ('View ' + name); pill.classList.add('on'); });
@@ -279,8 +279,8 @@ if (matchMedia('(hover: hover)').matches && !reduce) {
     if (Math.hypot(dx, dy) < 18 || live > 10) return;
     // centred on the body of the petal cursor (tip is the click point, body sits ~12px below it)
     const t = document.createElement('div'); t.className = 'trail'; t.innerHTML = petal;
-    t.style.left = (e.clientX - 4) + 'px'; t.style.top = (e.clientY + 7) + 'px';
-    t.style.rotate = (Math.random() * 12 - 6) + 'deg';
+    t.style.left = (e.clientX + 9 - 4) + 'px'; t.style.top = (e.clientY + 9 - 5) + 'px';
+    t.style.rotate = (-45 + Math.random() * 12 - 6) + 'deg';
     document.body.appendChild(t); live++;
     t.addEventListener('animationend', () => { t.remove(); live--; });
     lx = e.clientX; ly = e.clientY;
@@ -337,4 +337,15 @@ if (document.body.classList.contains('cs2')) {
     const r = end.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
     mark.style.translate = `${x * 30}px ${y * 20}px`; mark.style.rotate = `${x * 6}deg`;
   });
+}
+
+// Back button on every page except Home
+if (!document.body.classList.contains('home')) {
+  const back = document.createElement('a');
+  back.className = 'back-btn'; back.href = 'index.html#work'; back.setAttribute('aria-label', 'Back to my work');
+  back.innerHTML = '<span aria-hidden="true">←</span>Back';
+  back.addEventListener('click', e => {
+    try { if (document.referrer && new URL(document.referrer).origin === location.origin && history.length > 1) { e.preventDefault(); history.back(); } } catch (_) {}
+  });
+  (document.querySelector('.sheet') || document.body).appendChild(back);
 }

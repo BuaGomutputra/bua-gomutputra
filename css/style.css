@@ -17,8 +17,8 @@ html{font-synthesis:none}
 body{background:var(--footer);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.6}
 .sheet{background:var(--bg);border-radius:0 0 min(4.86vw,70px) min(4.86vw,70px);overflow:hidden;overflow:clip;position:relative}
 /* petal cursor (Bua's petal from Figma): dark grey, turquoise over anything clickable */
-html{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='26' viewBox='-9 -9 126 154'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .35 0'/%3E%3CfeComposite in2='SourceAlpha' operator='in' result='n'/%3E%3CfeMerge%3E%3CfeMergeNode in='SourceGraphic'/%3E%3CfeMergeNode in='n'/%3E%3C/feMerge%3E%3C/filter%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%23fff' stroke='%23fff' stroke-width='14' stroke-linejoin='round'/%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%23141414' filter='url(%23g)'/%3E%3C/svg%3E") 10 1,auto}
-a,button,label,summary,[role="button"],.slot,a *,button *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='26' viewBox='-9 -9 126 154'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .35 0'/%3E%3CfeComposite in2='SourceAlpha' operator='in' result='n'/%3E%3CfeMerge%3E%3CfeMergeNode in='SourceGraphic'/%3E%3CfeMergeNode in='n'/%3E%3C/feMerge%3E%3C/filter%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%23fff' stroke='%23fff' stroke-width='14' stroke-linejoin='round'/%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%2300A8CE' filter='url(%23g)'/%3E%3C/svg%3E") 10 1,pointer}
+html{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='25.5' viewBox='-5 10 128 136'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .35 0'/%3E%3CfeComposite in2='SourceAlpha' operator='in' result='n'/%3E%3CfeMerge%3E%3CfeMergeNode in='SourceGraphic'/%3E%3CfeMergeNode in='n'/%3E%3C/feMerge%3E%3C/filter%3E%3Cg transform='rotate(-45 54 68)'%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%23fff' stroke='%23fff' stroke-width='14' stroke-linejoin='round'/%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%23141414' filter='url(%23g)'/%3E%3C/g%3E%3C/svg%3E") 2 2,auto}
+a,button,label,summary,[role="button"],.slot,a *,button *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='25.5' viewBox='-5 10 128 136'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .35 0'/%3E%3CfeComposite in2='SourceAlpha' operator='in' result='n'/%3E%3CfeMerge%3E%3CfeMergeNode in='SourceGraphic'/%3E%3CfeMergeNode in='n'/%3E%3C/feMerge%3E%3C/filter%3E%3Cg transform='rotate(-45 54 68)'%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%23fff' stroke='%23fff' stroke-width='14' stroke-linejoin='round'/%3E%3Cpath d='M53.92 0L78.64 24.87C85.53 31.77 95.15 40.48 100.04 48.56C105.12 56.9 107.79 66.48 107.75 76.24C107.75 95.6 99.93 106.57 87.05 119.51C76.57 106.2 65.65 94.19 54.08 81.89C49.85 86.4 43.97 93.4 39.67 97.36C12.93 122.06 47.2 135.72 69.83 135.47C36.01 136.21 -0.12 109.84 0 76.17C-0.01 66.63 2.54 57.27 7.38 49.06C12.44 40.46 22.52 31.4 29.78 24.15L53.92 0Z' fill='%2300A8CE' filter='url(%23g)'/%3E%3C/g%3E%3C/svg%3E") 2 2,pointer}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
@@ -74,7 +74,7 @@ a.slot:focus-visible .tag{opacity:1;transform:none}
 /* project hover: the flower cursor stretches into a pill with a message */
 @media (hover:hover){.has-pill a.slot,.has-pill a.slot *{cursor:none}}
 .cursor-pill{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;display:flex;align-items:center;height:36px;padding:0 7px;border-radius:18px;background:rgba(251,251,251,.75);-webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);box-shadow:0 6px 20px rgba(20,20,20,.08),inset 0 0 0 1px rgba(255,255,255,.5);opacity:0;scale:.6;transition:opacity .18s ease,scale .3s cubic-bezier(.34,1.56,.64,1);will-change:transform}
-.cursor-pill svg{width:18px;height:22px;flex:none;fill:var(--blue);margin-left:3px}
+.cursor-pill svg{width:18px;height:22px;flex:none;fill:var(--blue);margin-left:3px;rotate:-45deg}
 .cursor-pill span{display:block;max-width:0;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:500;color:var(--blue-text);transition:max-width .35s cubic-bezier(.2,.8,.2,1),padding .35s}
 .cursor-pill.on{opacity:1;scale:1}
 .cursor-pill.on span{max-width:200px;padding:0 6px 0 8px}
@@ -226,6 +226,12 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .takeaways li::before{content:"0" counter(t);position:absolute;left:0;top:20px;font-family:var(--mono);font-size-adjust:.5;font-size:13px;color:var(--accent)}
 .takeaways b{display:block;color:var(--ink);font-size:19px;font-weight:600;margin-bottom:4px}
 
+/* back button on project pages */
+.back-btn{position:fixed;z-index:6;top:calc(max(48px,min(4.1vw,59px)) + 16px);left:max(16px,min(2.78vw,40px));display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 12px;border-radius:999px;font-size:14px;font-weight:500;color:var(--ink);background:rgba(251,251,251,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(20,20,20,.1),0 4px 14px rgba(20,20,20,.06);transition:box-shadow .3s,background .3s}
+.back-btn span{display:inline-block;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.back-btn:hover{background:#fff;box-shadow:0 0 0 1px rgba(0,168,206,.5),0 6px 18px rgba(20,20,20,.1)}
+.back-btn:hover span{transform:translateX(-4px)}
+
 /* SideBy: compact thank-you card */
 .thanks{position:relative;overflow:hidden;margin-top:104px;border-radius:16px;padding:44px 48px;display:flex;align-items:center;gap:40px;color:#FAF5EB;background:radial-gradient(ellipse at 30% 70%,#3A33A0 0%,#16133F 60%,#0B0A24 100%)}
 .thanks::after{content:"";position:absolute;right:-10%;bottom:-60%;width:60%;height:120%;background:#6B5CF2;opacity:.35;filter:blur(90px);border-radius:50%;pointer-events:none}
@@ -333,6 +339,7 @@ footer .cols a:hover{color:#fff}
   :root{--pad:20px}
   .sheet{border-radius:0 0 32px 32px}
   .nav{padding:0 20px}
+  .back-btn{position:absolute;top:58px;left:14px;padding:6px 12px 6px 10px;font-size:13px}
   .nav .links{display:none;position:absolute;top:48px;left:0;right:0;background:#fff;flex-direction:column;gap:18px;padding:20px;font-size:16px;box-shadow:0 8px 16px rgba(0,0,0,.05)}
   .nav.open .links{display:flex}
   .menu-btn{display:block}
@@ -345,7 +352,7 @@ footer .cols a:hover{color:#fff}
   .slot.empty{display:none}
   .slot .tag{opacity:1;transform:none;left:8px;bottom:8px;font-size:10px;padding:4px 7px}
   .slot .tag b{margin-right:4px}
-  .cs-head{padding:56px 20px 24px}
+  .cs-head{padding:80px 20px 24px}
   .overview .box{grid-template-columns:1fr;gap:28px;padding:24px 20px}
   .media{padding-bottom:56px}
   .section{padding-bottom:56px}
@@ -363,7 +370,7 @@ footer .cols a:hover{color:#fff}
   .ending .slogan{font-size:44px;line-height:.95;margin-top:22px}
   .ending .next{font-size:13px;margin-top:16px}
   .next-proj{padding-bottom:72px}.next-proj h3{font-size:32px}.next-proj .tile{aspect-ratio:3/2}
-  .about-hero{height:auto;padding:32px 20px 48px;display:flex;flex-direction:column;gap:32px}
+  .about-hero{height:auto;padding:76px 20px 48px;display:flex;flex-direction:column;gap:32px}
   .polaroid{position:relative;left:auto;top:auto;width:62%;height:auto;aspect-ratio:273/321}
   .p1{align-self:flex-start;margin-left:6%}.p2{align-self:flex-end;margin-top:-34%;margin-right:4%}
   .intro{position:static;width:auto}
@@ -372,7 +379,7 @@ footer .cols a:hover{color:#fff}
   .lately-row{grid-template-columns:1fr;row-gap:16px}
   .cs-wrap{grid-template-columns:1fr;padding:0 20px;gap:0}
   .toc{display:none}
-  .cs-landing{padding-top:48px}
+  .cs-landing{padding-top:76px}
   .facts{grid-template-columns:1fr 1fr;gap:20px}
   .mypart{padding:22px 20px}.mypart ul{columns:1}
   .blk{padding-top:80px}
