@@ -19,20 +19,21 @@ document.querySelectorAll('img[data-label]').forEach(img => {
 const nav = document.querySelector('.nav');
 document.querySelector('.menu-btn')?.addEventListener('click', () => nav.classList.toggle('open'));
 
-// Rotating hero line
-const rot = document.querySelector('.rotator span');
-if (rot) {
-  const phrases = JSON.parse(rot.parentElement.dataset.phrases);
+// Hero line: "is a designer who" stays, the ending types itself
+const typed = document.querySelector('.typer .typed');
+if (typed && !reduce) {
+  const ends = JSON.parse(typed.parentElement.dataset.phrases);
   let i = 0;
-  if (!reduce) setInterval(() => {
-    i = (i + 1) % phrases.length;
-    rot.classList.add('out');
-    setTimeout(() => {
-      rot.textContent = phrases[i];
-      rot.classList.remove('out'); rot.classList.add('in');
-      requestAnimationFrame(() => requestAnimationFrame(() => rot.classList.remove('in')));
-    }, 250);
-  }, 2000);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  (async () => {
+    while (true) {
+      await wait(1900);
+      for (let t = typed.textContent; t.length; t = t.slice(0, -1)) { typed.textContent = t.slice(0, -1); await wait(28); }
+      i = (i + 1) % ends.length;
+      await wait(250);
+      for (const ch of ends[i]) { typed.textContent += ch; await wait(60); }
+    }
+  })();
 }
 
 // Live LA clock
