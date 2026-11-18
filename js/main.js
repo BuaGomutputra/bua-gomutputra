@@ -138,7 +138,7 @@ if (zoomables.length) {
 }
 
 // Magnifying glass: a round lens follows the mouse over project images and zooms in (mouse only)
-if (zoomables.length && matchMedia('(hover: hover)').matches && !document.body.classList.contains('theme-duo')) {
+if (zoomables.length && matchMedia('(hover: hover)').matches && document.body.classList.contains('theme-sideby')) {
   const lens = document.createElement('div'); lens.className = 'lens'; lens.setAttribute('aria-hidden', 'true'); document.body.appendChild(lens);
   const Z = 1.6, R = 120;
   const posOf = v => v.endsWith('%') ? parseFloat(v) / 100 : (v === 'left' || v === 'top') ? 0 : (v === 'right' || v === 'bottom') ? 1 : .5;
@@ -456,22 +456,53 @@ if (counters.length && !reduce) {
   counters.forEach(el => io3.observe(el));
 }
 
-// EcoPinet milestones: click a step or let it play through on a loop
+// EcoPinet milestones: a timeline you can tap, or let play on a loop
 const ms = document.querySelector('.milestones');
 if (ms) {
-  const btns = [...ms.querySelectorAll('.ms-tabs button')], figs = [...ms.querySelectorAll('.ms-view figure')], run = ms.querySelector('.ms-run');
-  let cur = 0, timer = null, start = 0, visible = false, paused = false; const DUR = 4200;
-  const show = i => { cur = i; btns.forEach((b, k) => b.setAttribute('aria-selected', k === i)); figs.forEach((f, k) => f.classList.toggle('on', k === i)); start = performance.now(); };
-  const loop = t => {
-    if (!visible || paused || reduce) { run.style.width = '0'; return; }
-    const b = btns[cur], k = Math.min(1, (t - start) / DUR);
-    run.style.left = b.offsetLeft + 'px'; run.style.width = (b.offsetWidth * k) + 'px';
-    if (k >= 1) show((cur + 1) % btns.length);
-    timer = requestAnimationFrame(loop);
-  };
-  btns.forEach((b, i) => b.addEventListener('click', () => { show(i); }));
-  ms.addEventListener('pointerenter', () => { paused = true; run.style.width = '0'; });
-  ms.addEventListener('pointerleave', () => { paused = false; start = performance.now(); requestAnimationFrame(loop); });
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) { start = performance.now(); cancelAnimationFrame(timer); requestAnimationFrame(loop); } }, { threshold: .4 }).observe(ms);
+  const btns = [...ms.querySelectorAll('.ms-line button')], figs = [...ms.querySelectorAll('.ms-view figure')], fill = ms.querySelector('.ms-fill'), rings = btns.map(b => b.querySelector('.ring'));
+  let cur = 0, start = 0, visible = false, paused = false, raf; const DUR = 4500, N = btns.length;
+  const show = i => { cur = (i + N) % N; btns.forEach((b, k) => { b.setAttribute('aria-selected', k === cur); b.classList.toggle('done', k < cur); }); figs.forEach((f, k) => f.classList.toggle('on', k === cur)); fill.style.width = (cur / (N - 1) * 100) + '%'; rings.forEach(r => r.style.strokeDashoffset = 100.5); start = performance.now(); };
+  const loop = t => { cancelAnimationFrame(raf); if (!visible || paused || reduce) return; const k = Math.min(1, (t - start) / DUR); rings[cur].style.strokeDashoffset = 100.5 * (1 - k); if (k >= 1) show(cur + 1); raf = requestAnimationFrame(loop); };
+  const go = i => { show(i); paused = true; setTimeout(() => { paused = false; start = performance.now(); raf = requestAnimationFrame(loop); }, 7000); };
+  btns.forEach((b, i) => b.addEventListener('click', () => go(i)));
+  ms.querySelector('.ms-arrow.prev').addEventListener('click', () => go(cur - 1));
+  ms.querySelector('.ms-arrow.next').addEventListener('click', () => go(cur + 1));
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) { start = performance.now(); raf = requestAnimationFrame(loop); } }, { threshold: .4 }).observe(ms);
   show(0);
+}
+
+// EcoPinet problems: expanding photo panels
+document.querySelectorAll('.panels').forEach(g => {
+  const ps = [...g.querySelectorAll('.pp')];
+  const open = p => ps.forEach(x => { x.classList.toggle('on', x === p); x.setAttribute('aria-expanded', x === p); });
+  ps.forEach(p => { p.addEventListener('click', () => open(p)); if (matchMedia('(hover: hover)').matches) p.addEventListener('mouseenter', () => open(p)); });
+});
+
+// EcoPinet process: deal through a stack of real photos
+const stack = document.querySelector('.paperstack');
+if (stack) {
+  const cards = [...stack.querySelectorAll('.pc')], chips = [...stack.querySelectorAll('.ps-steps button')], count = stack.querySelector('.ps-count b'), next = stack.querySelector('.ps-next'), prev = stack.querySelector('.ps-prev'), N = cards.length;
+  let cur = 0;
+  const lay = () => {
+    cards.forEach((c, i) => {
+      const d = i - cur;
+      c.classList.toggle('gone', d < 0);
+      c.style.zIndex = N - i;
+      if (d >= 0) { const r = [0, 3, -2.5, 4][Math.min(d, 3)] * (i % 2 ? -1 : 1); c.style.transform = `translate(${Math.min(d, 3) * 7}px, ${Math.min(d, 3) * 6}px) rotate(${d === 0 ? (i % 2 ? 1.2 : -1.2) : r}deg)`; c.style.opacity = d > 3 ? 0 : 1; }
+    });
+    chips.forEach((b, i) => { b.classList.toggle('on', i === cur); b.classList.toggle('seen', i < cur); });
+    count.textContent = String(cur + 1).padStart(2, '0');
+    next.textContent = cur === N - 1 ? 'Start over ↺' : 'Next step →';
+    prev.disabled = cur === 0;
+  };
+  const go = i => { cur = (i + N) % N; lay(); };
+  next.addEventListener('click', () => go(cur === N - 1 ? 0 : cur + 1));
+  prev.addEventListener('click', () => go(cur - 1));
+  chips.forEach((b, i) => b.addEventListener('click', () => go(i)));
+  const area = stack.querySelector('.ps-cards'); let x0 = null, moved = false;
+  area.addEventListener('pointerdown', e => { x0 = e.clientX; moved = false; });
+  area.addEventListener('pointermove', e => { if (x0 === null) return; const dx = e.clientX - x0; if (Math.abs(dx) > 6) moved = true; const top = cards[cur]; if (top) top.style.transform = `translate(${dx}px, 0) rotate(${dx / 25}deg)`; });
+  const end = e => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (!moved || dx > 60) go(cur === N - 1 ? 0 : cur + 1); else if (dx < -60) go(cur - 1); else lay(); };
+  area.addEventListener('pointerup', end); area.addEventListener('pointerleave', e => { if (x0 !== null) { x0 = null; lay(); } });
+  lay();
 }
