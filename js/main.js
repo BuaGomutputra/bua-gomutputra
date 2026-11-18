@@ -234,10 +234,11 @@ if (matchMedia('(hover: hover)').matches && !reduce) {
     if (e.pointerType !== 'mouse') return;
     if (lx === null) { lx = e.clientX; ly = e.clientY; return; }
     const dx = e.clientX - lx, dy = e.clientY - ly;
-    if (Math.hypot(dx, dy) < 22 || live > 14) return;
-    const angle = Math.atan2(dy, dx) * 180 / Math.PI - 90 + 180; // tip points back along the path
+    if (Math.hypot(dx, dy) < 12 || live > 18) return;
+    // centred on the body of the petal cursor (tip is the click point, body sits ~12px below it)
     const t = document.createElement('div'); t.className = 'trail'; t.innerHTML = petal;
-    t.style.transform = `translate(${lx - 5}px, ${ly - 5}px) rotate(${angle + (Math.random() * 30 - 15)}deg)`;
+    t.style.left = (e.clientX - 5) + 'px'; t.style.top = (e.clientY + 6) + 'px';
+    t.style.rotate = (Math.random() * 12 - 6) + 'deg';
     document.body.appendChild(t); live++;
     t.addEventListener('animationend', () => { t.remove(); live--; });
     lx = e.clientX; ly = e.clientY;
