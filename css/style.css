@@ -72,7 +72,7 @@ a.slot:focus-visible .tag{opacity:1;transform:none}
 
 /* project hover: the flower cursor stretches into a pill with a message */
 @media (hover:hover){.has-pill a.slot,.has-pill a.slot *{cursor:none}}
-.cursor-pill{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;display:flex;align-items:center;height:36px;padding:0 7px;border-radius:18px;background:rgba(251,251,251,.5);-webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);box-shadow:0 6px 20px rgba(20,20,20,.08),inset 0 0 0 1px rgba(255,255,255,.5);opacity:0;scale:.6;transition:opacity .18s ease,scale .3s cubic-bezier(.34,1.56,.64,1);will-change:transform}
+.cursor-pill{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;display:flex;align-items:center;height:36px;padding:0 7px;border-radius:18px;background:rgba(251,251,251,.75);-webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);box-shadow:0 6px 20px rgba(20,20,20,.08),inset 0 0 0 1px rgba(255,255,255,.5);opacity:0;scale:.6;transition:opacity .18s ease,scale .3s cubic-bezier(.34,1.56,.64,1);will-change:transform}
 .cursor-pill svg{width:18px;height:22px;flex:none;fill:var(--blue);margin-left:3px}
 .cursor-pill span{display:block;max-width:0;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:500;color:var(--blue-text);transition:max-width .35s cubic-bezier(.2,.8,.2,1),padding .35s}
 .cursor-pill.on{opacity:1;scale:1}
