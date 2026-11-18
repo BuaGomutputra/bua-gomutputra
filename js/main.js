@@ -245,10 +245,19 @@ if (matchMedia('(hover: hover)').matches && !reduce) {
   }, { passive: true });
 }
 
-// Case study table of contents: highlight the section you're reading
+// Case study table of contents: stays on the left, highlights the section you're reading
 const tocLinks = [...document.querySelectorAll('.toc a')];
 if (tocLinks.length) {
-  const map = new Map(tocLinks.map(a => [a.getAttribute('href').slice(1), a]));
-  const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(a => a.classList.remove('on')); map.get(e.target.id)?.classList.add('on'); } }), { rootMargin: '-35% 0px -60% 0px' });
-  map.forEach((a, id) => { const el = document.getElementById(id); if (el) io2.observe(el); });
+  const secs = tocLinks.map(a => [a, document.getElementById(a.getAttribute('href').slice(1))]).filter(([, el]) => el);
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const line = innerHeight * .35;
+    let cur = secs[0];
+    for (const s of secs) if (s[1].getBoundingClientRect().top <= line) cur = s;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = secs[secs.length - 1];
+    tocLinks.forEach(a => a.classList.toggle('on', a === cur[0]));
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update); update();
 }
