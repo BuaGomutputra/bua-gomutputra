@@ -160,7 +160,7 @@ a.slot:focus-visible .tag{opacity:1;transform:none}
 
 /* case study v2 (Lauryn-style structure) — Bua's palette + SideBy purple/deep blue accents */
 .cs2{--accent:#5B4BD6;--deep:#16133F;--lav:#EFEDFC;--lav2:#DCD7FA}
-.cs-wrap{display:grid;grid-template-columns:170px minmax(0,1fr);gap:72px;max-width:1240px;margin:0 auto;padding:0 56px}
+.cs-wrap{display:grid;grid-template-columns:170px minmax(0,1fr);gap:48px;padding:0 max(32px,min(8.89vw,128px)) 0 max(20px,min(8.89vw,128px))}
 .toc{position:sticky;top:32px;align-self:start;padding-top:96px}
 .toc ol{list-style:none;font-family:var(--mono);font-size:12px;line-height:1.3}
 .toc li+li{margin-top:12px}
@@ -168,7 +168,7 @@ a.slot:focus-visible .tag{opacity:1;transform:none}
 .toc a span{color:var(--lav2);transition:color .2s}
 .toc a:hover,.toc a.on{color:var(--ink)}
 .toc a.on span{color:var(--accent)}
-.cs-main{min-width:0;max-width:960px}
+.cs-main{min-width:0;max-width:960px;width:100%;justify-self:center}
 .cs-landing{padding-top:88px}
 .cs-landing .eyebrow{color:var(--accent)}
 .cs-landing h1{font-size:clamp(44px,5vw,72px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin:14px 0 16px}
