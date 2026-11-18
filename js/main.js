@@ -46,10 +46,10 @@ if (clock) {
   tick(); setInterval(tick, 30000);
 }
 
-// Pixel reveal: images start as blurred squares and sharpen on hover (phones: on scroll)
+// Pixel reveal (About photo grid only): images start as blurred squares and sharpen on hover (phones: on scroll)
 const hoverable = matchMedia('(hover: hover)').matches;
-document.querySelectorAll('.slot img').forEach(img => {
-  const slot = img.closest('.slot');
+document.querySelectorAll('.dump .cell img').forEach(img => {
+  const slot = img.closest('.cell');
   const cv = document.createElement('canvas'); cv.className = 'px'; slot.appendChild(cv);
   const ctx = cv.getContext('2d');
   let anim, size = 28;
