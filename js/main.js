@@ -28,10 +28,13 @@ if (typed && !reduce) {
   (async () => {
     while (true) {
       await wait(1900);
+      const box = typed.parentElement;
+      box.classList.add('busy');
       for (let t = typed.textContent; t.length; t = t.slice(0, -1)) { typed.textContent = t.slice(0, -1); await wait(28); }
       i = (i + 1) % ends.length;
-      await wait(250);
-      for (const ch of ends[i]) { typed.textContent += ch; await wait(60); }
+      await wait(300);
+      for (const ch of ends[i]) { typed.textContent += ch; await wait(55 + Math.random() * 45); }
+      box.classList.remove('busy');
     }
   })();
 }
