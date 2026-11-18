@@ -165,7 +165,7 @@ if (swL && swR && !reduce && matchMedia('(hover: hover)').matches) {
 // Floating flowers in the header (from Figma): drift, spin, bounce off the edges, scatter away from the mouse
 const sheet = document.querySelector('.home .sheet'), firstTile = document.querySelector('.mosaic');
 if (sheet && firstTile) {
-  const SPECS = [[350,158,55.0,0],[1159,197,55.6,7],[160,118,34.3,23],[304,200,33.9,-34],[950,352,40.4,41],[1206,134,33.7,4],[1317,335,28.9,57],[108,402,29.0,-27]]; // [centerX, centerY, size, rotation] in the 1440-wide Figma frame
+  const SPECS = [[350,158,55.0,0],[1159,197,55.6,7],[160,118,34.3,23],[950,352,40.4,41],[1317,335,28.9,57],[108,402,29.0,-27]]; // [centerX, centerY, size, rotation] in the 1440-wide Figma frame
   const field = document.createElement('div');
   field.className = 'flowers'; field.setAttribute('aria-hidden', 'true');
   field.innerHTML = '<svg width="0" height="0" style="position:absolute"><filter id="fgrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .32 0" result="d"/><feComposite in="d" in2="SourceAlpha" operator="in" result="g"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="g"/></feMerge></filter></svg>';
