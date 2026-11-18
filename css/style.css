@@ -33,6 +33,9 @@ a{color:inherit;text-decoration:none}
 
 /* home background: gradient swirls exported from the Figma mock-up */
 .swirls{position:absolute;inset:0;pointer-events:none;z-index:0}
+.flowers{position:absolute;left:0;top:0;width:100%;pointer-events:none;z-index:0;overflow:hidden}
+.flower{position:absolute;left:0;top:0;will-change:transform}
+.flower svg{display:block;width:100%;height:100%}
 .sw{position:absolute;max-width:none;will-change:transform}
 .sw-l{left:7.92vw;top:3.75vw;width:32.9vw}
 .sw-r{left:40.35vw;top:3.33vw;width:53vw}
@@ -40,15 +43,15 @@ a{color:inherit;text-decoration:none}
 .home .hero,.home main,.home .nav{position:relative;z-index:1}
 
 /* hero */
-.hero{position:relative;padding:min(5.83vw,84px) 0 0 min(8.89vw,128px);text-align:left}
+.hero{position:relative;padding-top:min(5.83vw,84px);text-align:center}
 .hero h1{font-size:max(40px,min(5.56vw,80px));font-weight:500;letter-spacing:0;line-height:1;color:#000}
 .rotator{display:block;font-family:var(--mono);font-weight:500;color:#1A1A1A}
-.rotator.typer{width:min(58.8vw,847px);margin:min(4.17vw,60px) 0 0;text-align:left;min-height:min(9.58vw,138px);line-height:1.3;font-size:max(15px,min(1.6vw,23px))}
+.rotator.typer{width:min(58.8vw,847px);margin:min(4.17vw,60px) 0 0 calc(50% - min(29.38vw,423px));text-align:left;min-height:min(9.58vw,138px);line-height:1.3;font-size:max(15px,min(1.6vw,23px))}
 .typer .typed{display:inline}
 .caret{display:inline-block;width:2px;height:1.1em;margin-left:3px;vertical-align:-.18em;background:var(--blue);animation:blink 1.05s steps(1) infinite}
 .typer.busy .caret{animation:none}
 @keyframes blink{50%{opacity:0}}
-.creds{display:flex;justify-content:center;margin-left:calc(-1 * min(8.89vw,128px));line-height:1.28;gap:min(3.33vw,48px);font-size:max(13px,min(1.25vw,18px));flex-wrap:wrap}
+.creds{display:flex;justify-content:center;line-height:1.28;gap:min(3.33vw,48px);font-size:max(13px,min(1.25vw,18px));flex-wrap:wrap}
 .creds b{color:var(--muted);font-weight:400;margin-right:.55em}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);flex:none}
 
@@ -199,7 +202,7 @@ footer .cols a:hover{color:#fff}
   .nav .links{display:none;position:absolute;top:48px;left:0;right:0;background:#fff;flex-direction:column;gap:18px;padding:20px;font-size:16px;box-shadow:0 8px 16px rgba(0,0,0,.05)}
   .nav.open .links{display:flex}
   .menu-btn{display:block}
-  .hero{padding:48px 20px 0}
+  .hero{padding:48px 20px 0;text-align:left}
   .hero h1{font-size:44px}
   .rotator.typer{width:auto;margin:16px 0 0;font-size:17px;min-height:2.7em}
   .creds{flex-direction:column;align-items:flex-start;gap:6px;font-size:14px;margin:8px 0 0}
