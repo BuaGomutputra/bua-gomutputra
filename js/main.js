@@ -349,3 +349,6 @@ if (!document.body.classList.contains('home')) {
   });
   (document.querySelector('.sheet') || document.body).appendChild(back);
 }
+
+// nav words: remember their text so the bold hover doesn't shift neighbours
+document.querySelectorAll('.nav .links a, .nav .name').forEach(a => a.dataset.text = a.textContent);
