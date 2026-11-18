@@ -616,7 +616,7 @@ const flow = document.querySelector('.flow');
 if (flow && !reduce) {
   const nodes = [...flow.querySelectorAll('.fn')]; let k = 0, t = null;
   const tick = () => { nodes.forEach(n => n.classList.remove('lit')); nodes[k].classList.add('lit'); if (nodes[k].parentElement.classList.contains('fsplit')) { nodes[k + 1].classList.add('lit'); k++; } k = (k + 1) % (nodes.length + 2); if (k >= nodes.length) k = 0; };
-  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !t) t = setInterval(tick, 650); else if (!e.isIntersecting && t) { clearInterval(t); t = null; } }), { threshold: .3 }).observe(flow);
+  new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !t) t = setInterval(tick, 1200); else if (!e.isIntersecting && t) { clearInterval(t); t = null; } }), { threshold: .3 }).observe(flow);
 }
 
 // BuzzTile: press-and-hold piezo demo
