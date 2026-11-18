@@ -427,3 +427,18 @@ if (dev) {
   $('.d-x').addEventListener('click', () => { step = 0; lives = 5; streak = 0; best = 0; hearts.textContent = 5; render(); });
   render();
 }
+
+// Tony's stats count up when they scroll into view
+const stage = document.querySelector('.stage');
+if (stage && !reduce) {
+  const nums = [...stage.querySelectorAll('b[data-to]')];
+  nums.forEach(b => b.textContent = '0');
+  new IntersectionObserver(([e], o) => {
+    if (!e.isIntersecting) return; o.disconnect();
+    const t0 = performance.now(), D = 1600;
+    const tick = t => { const k = Math.min(1, (t - t0) / D), ease = 1 - Math.pow(1 - k, 3);
+      nums.forEach(b => b.textContent = Math.round(+b.dataset.to * ease).toLocaleString('en-US'));
+      if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }, { threshold: .4 }).observe(stage);
+}

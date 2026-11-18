@@ -287,6 +287,23 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .steps figure{margin-top:22px}
 .theme-duo #takeaways figure{max-width:620px;margin-top:28px}
 .theme-duo .quote{border-left-color:var(--duo);color:#2B3A20}
+/* slightly richer colour on the DuoPoker page */
+.theme-duo .cs-main img{filter:saturate(1.18) contrast(1.02)}
+.theme-duo.cs2{--lav:#E6F8D5;--lav2:#BFEA9C}
+/* Tony's stats, live: badges bob in a loop, numbers count up */
+.tony-stage{margin-top:22px}
+.stage{position:relative;aspect-ratio:1920/1077;border-radius:10px;overflow:hidden;container-type:inline-size;background:linear-gradient(#fff 70.85%,#F5F5F5 70.85%)}
+.stage .tony{position:absolute;left:33.33%;top:23.2%;width:33.85%;filter:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);transform-origin:50% 100%;animation:breathe 4.2s ease-in-out infinite}
+@keyframes breathe{50%{transform:scaleY(1.012) scaleX(.996)}}
+.sb{position:absolute;transform:translate(-50%,-50%);min-width:11.6cqw;border-radius:1.1cqw;padding:.25cqw .3cqw .4cqw;text-align:center;box-shadow:0 .35cqw 0 var(--sh);background:var(--c);animation:bob 3.6s ease-in-out infinite;animation-delay:calc(var(--d) * -1);transition:scale .3s cubic-bezier(.34,1.56,.64,1)}
+.sb:hover{scale:1.08;z-index:2}
+.sb span{display:block;font-size:.82cqw;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:.15cqw .6cqw .25cqw;white-space:nowrap}
+.sb b{display:block;background:#fff;border-radius:.8cqw;font-size:2.05cqw;font-weight:700;color:#3C3C3C;padding:.3cqw .9cqw;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sb.blue{--c:#1CB0F6;--sh:#1899D6}.sb.green{--c:#58CC02;--sh:#58A700}.sb.purple{--c:#CE82FF;--sh:#A568CC}.sb.yellow{--c:#FFC800;--sh:#E0AE00}
+.sb.yellow span{color:#7A5A00}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -.7cqw}}
+@media (prefers-reduced-motion:reduce){.sb,.stage .tony{animation:none}}
+
 /* real lesson screens, cropped from the pitch */
 .phones{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px;max-width:640px}
 .phones figure{margin:0;text-align:center}
