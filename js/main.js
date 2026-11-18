@@ -244,3 +244,11 @@ if (matchMedia('(hover: hover)').matches && !reduce) {
     lx = e.clientX; ly = e.clientY;
   }, { passive: true });
 }
+
+// Case study table of contents: highlight the section you're reading
+const tocLinks = [...document.querySelectorAll('.toc a')];
+if (tocLinks.length) {
+  const map = new Map(tocLinks.map(a => [a.getAttribute('href').slice(1), a]));
+  const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(a => a.classList.remove('on')); map.get(e.target.id)?.classList.add('on'); } }), { rootMargin: '-35% 0px -60% 0px' });
+  map.forEach((a, id) => { const el = document.getElementById(id); if (el) io2.observe(el); });
+}
