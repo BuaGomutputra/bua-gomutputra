@@ -272,6 +272,7 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .duo-cards>div:nth-child(2){background:var(--duo-blue)!important;box-shadow:0 5px 0 #1899D6}
 .duo-cards>div:nth-child(3){background:var(--duo-yel)!important;box-shadow:0 5px 0 #E0AE00}
 .duo-cards>div:nth-child(3) b,.duo-cards>div:nth-child(3) p{color:#4B3A00}
+.duo-cards{grid-template-columns:1fr 1fr}
 .duo-cards b{font-size:26px}
 .duo-cards p{color:rgba(255,255,255,.92)!important}
 .duo-cards>div:active{transform:translateY(5px)!important;box-shadow:0 0 0 transparent!important}
