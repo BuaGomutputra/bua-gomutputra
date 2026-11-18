@@ -506,3 +506,11 @@ if (stack) {
   area.addEventListener('pointerup', end); area.addEventListener('pointerleave', e => { if (x0 !== null) { x0 = null; lay(); } });
   lay();
 }
+
+// Click-to-play YouTube (loads the video only when clicked)
+document.querySelectorAll('.yt').forEach(b => b.addEventListener('click', () => {
+  const f = document.createElement('iframe');
+  f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0`;
+  f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.title = b.getAttribute('aria-label');
+  b.replaceChildren(f);
+}, { once: true }));

@@ -328,6 +328,46 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .ms-arrow{position:absolute;bottom:16px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(251,251,251,.9);font-size:22px;line-height:1;color:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.12);transition:transform .2s}
 .ms-arrow:hover{transform:scale(1.1)}
 .ms-arrow.prev{right:64px}.ms-arrow.next{right:16px}
+/* EcoPinet: logos, links, press, videos, hotel */
+.eco-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.eco-links a{font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;background:var(--lav);color:var(--accent);transition:background .2s,transform .2s}
+.eco-links a:hover{background:var(--lav2);transform:translateY(-2px)}
+.impact{grid-template-columns:1.35fr 1fr 1fr 1fr!important}
+.imp-logo{display:block;height:34px;width:auto;max-width:100%;object-fit:contain;margin-bottom:18px;filter:none!important}
+.imp-logo.sm{height:40px;margin-bottom:10px}
+.imp.big .imp-logo{background:#fff;padding:8px 12px;border-radius:10px;height:52px;margin:0 0 auto}
+.imp.big::before{display:none}
+.imp.big small{display:block;font-size:13px;line-height:1.5;color:#BFAE96;margin-top:14px}
+.imp.tv{display:flex;flex-direction:column;justify-content:space-between}
+.cap-logo{height:22px;width:auto;vertical-align:-5px;margin-right:8px;filter:none!important;background:#fff;border-radius:4px;padding:2px 4px}
+.yt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+.yt{font:inherit;position:relative;display:block;aspect-ratio:16/10;border:0;padding:0;border-radius:12px;overflow:hidden;background:#000;color:#fff;text-align:left}
+.yt img{width:100%;height:100%;object-fit:cover;opacity:.85;filter:none!important;transition:transform .5s,opacity .3s}
+.yt:hover img{transform:scale(1.05);opacity:1}
+.yt-play{position:absolute;left:50%;top:44%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.92);color:#C4302B;display:grid;place-items:center;font-size:16px;padding-left:3px;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.yt:hover .yt-play{transform:scale(1.15)}
+.yt-t{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;font-size:14px;font-weight:600;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.press{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.press-item{position:relative;display:block;padding:16px 40px 16px 18px;border-radius:12px;background:var(--kraft);transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .2s}
+.press-item b{display:block;font-size:16px;font-weight:600;color:var(--deep)}
+.press-item span{display:block;font-size:14px;color:#6A5442;margin-top:2px}
+.press-item i{position:absolute;right:16px;top:16px;font-style:normal;color:var(--accent);transition:transform .2s}
+.press-item:hover{transform:translateY(-3px);background:#E8DABF}
+.press-item:hover i{transform:translate(2px,-2px)}
+.prod3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.prod3 img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px}
+.hotel{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:24px;align-items:center;margin-top:28px;padding:28px;border-radius:18px;background:var(--kraft)}
+.hotel .lab{color:var(--accent)}
+.hotel h3{font-size:24px;font-weight:600;letter-spacing:-.01em;color:var(--deep);margin:8px 0 10px}
+.hotel-copy>p:last-child{font-size:15.5px;line-height:1.55;color:#6A5442}
+.hotel-pics{position:relative;height:300px}
+.hotel-pics img{position:absolute;width:52%;aspect-ratio:4/3;object-fit:cover;border:6px solid #fff;border-radius:4px;box-shadow:0 10px 24px rgba(59,36,20,.18);transition:transform .45s cubic-bezier(.34,1.56,.64,1),z-index 0s .1s}
+.hotel-pics img:nth-child(1){left:0;top:20px;rotate:-4deg;z-index:2}
+.hotel-pics img:nth-child(2){left:30%;top:80px;rotate:3deg;z-index:3}
+.hotel-pics img:nth-child(3){right:0;top:0;rotate:5deg;z-index:1}
+.hotel-pics img:hover{z-index:5;transform:scale(1.08) rotate(0deg)}
+
 /* three problems: expanding photo panels */
 .panels{display:flex;gap:12px;height:460px;margin-top:22px}
 .pp{font:inherit;position:relative;flex:1;min-width:0;border:0;border-radius:16px;overflow:hidden;padding:22px;text-align:left;color:#fff;background:#222;transition:flex .6s cubic-bezier(.2,.8,.2,1)}
@@ -686,6 +726,7 @@ footer .cols a:hover{color:#fff}
   .paperstack{grid-template-columns:1fr;padding:20px;gap:24px}
   .app{grid-template-columns:1fr;padding:26px}.app-phones{height:400px}.aph{width:150px;height:322px;border-radius:26px}.aph.p2{margin-left:-75px}.ms-view{aspect-ratio:4/3}.ms-view figcaption{font-size:13.5px;padding:10px 12px}
   .mosaic-4{grid-template-columns:1fr 1fr;grid-template-rows:200px 140px}
+  .impact{grid-template-columns:1fr 1fr!important}.yt-grid{grid-template-columns:1fr 1fr}.press{grid-template-columns:1fr}.prod3{grid-template-columns:1fr 1fr}.prod3 img:last-child{display:none}.hotel{grid-template-columns:1fr;padding:20px}.hotel-pics{height:230px}
   .try-row{grid-template-columns:1fr;gap:28px}.device{width:min(340px,100%);height:700px;margin:0 auto;border-radius:48px}.device-screen{border-radius:38px}.phones{gap:14px}
   .steps>li{padding-left:44px}.step-head{margin-left:-44px}.steps>li::before{left:17px}
   .suits span{width:40px;height:54px;font-size:22px}
