@@ -243,6 +243,6 @@ footer .cols a:hover{color:#fff}
 @media (prefers-reduced-motion:reduce){ *{transition:none!important;scroll-behavior:auto!important} .reveal{opacity:1;transform:none} }
 
 /* cursor trail: little light-cyan petals that fade out behind the mouse */
-.trail{position:fixed;left:0;top:0;width:10px;height:12.5px;pointer-events:none;z-index:999;filter:drop-shadow(0 0 .6px rgba(0,122,150,.5));transform-origin:50% 40%;animation:trail .65s ease-out forwards}
+.trail{position:fixed;left:0;top:0;width:8px;height:10px;pointer-events:none;z-index:999;filter:drop-shadow(0 0 .5px rgba(0,122,150,.35));transform-origin:50% 40%;animation:trail .5s ease-out forwards}
 .trail svg{display:block;width:100%;height:100%}
-@keyframes trail{0%{opacity:.85;scale:1}100%{opacity:0;scale:.2}}
+@keyframes trail{0%{opacity:.55;scale:1}100%{opacity:0;scale:.2}}
