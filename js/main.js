@@ -140,7 +140,7 @@ if (zoomables.length) {
 // Magnifying glass: a round lens follows the mouse over project images and zooms in (mouse only)
 if (zoomables.length && matchMedia('(hover: hover)').matches) {
   const lens = document.createElement('div'); lens.className = 'lens'; lens.setAttribute('aria-hidden', 'true'); document.body.appendChild(lens);
-  const Z = 2.2, R = 100;
+  const Z = 1.6, R = 120;
   const posOf = v => v.endsWith('%') ? parseFloat(v) / 100 : (v === 'left' || v === 'top') ? 0 : (v === 'right' || v === 'bottom') ? 1 : .5;
   zoomables.forEach(img => {
     let geo = null;
