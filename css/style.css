@@ -260,6 +260,69 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .cs2 .next-proj h3{font-size:max(22px,min(1.94vw,28px));margin:8px 0 18px}
 .cs2 .next-proj .tile{width:min(100%,560px);aspect-ratio:16/9}
 
+/* ===== DuoPoker case study: Duolingo colours ===== */
+.theme-duo.cs2{--accent:#3C8A00;--deep:#2B5A0A;--lav:#EDF9E2;--lav2:#CDEDB3;--duo:#58CC02;--duo-dk:#58A700;--duo-blue:#1CB0F6;--duo-yel:#FFC800;--duo-red:#FF4B4B}
+.theme-duo .cs-landing .lede em{color:var(--duo-dk)}
+.goal-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0 26px}
+.goal-chips div{background:#fff;border:2px solid #E5E5E5;border-bottom-width:4px;border-radius:16px;padding:18px 20px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),border-color .2s}
+.goal-chips div:hover{transform:translateY(-3px);border-color:var(--duo)}
+.goal-chips b{display:block;font-size:24px;font-weight:600;letter-spacing:-.02em;color:var(--duo-dk)}
+.goal-chips span{display:block;font-size:15px;line-height:1.45;color:var(--soft);margin-top:4px}
+.duo-cards>div{background:var(--duo)!important;background-image:none!important;color:#fff;border-radius:16px;box-shadow:0 5px 0 var(--duo-dk)}
+.duo-cards>div:nth-child(2){background:var(--duo-blue)!important;box-shadow:0 5px 0 #1899D6}
+.duo-cards>div:nth-child(3){background:var(--duo-yel)!important;box-shadow:0 5px 0 #E0AE00}
+.duo-cards>div:nth-child(3) b,.duo-cards>div:nth-child(3) p{color:#4B3A00}
+.duo-cards b{font-size:26px}
+.duo-cards p{color:rgba(255,255,255,.92)!important}
+.duo-cards>div:active{transform:translateY(5px)!important;box-shadow:0 0 0 transparent!important}
+.steps{list-style:none;counter-reset:s}
+.steps>li{position:relative;padding:0 0 56px 56px}
+.steps>li::before{content:"";position:absolute;left:17px;top:40px;bottom:8px;width:2px;background:var(--lav2)}
+.steps>li:last-child::before{display:none}
+.step-head{display:flex;align-items:center;gap:16px;margin:0 0 14px -56px}
+.step-head span{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--duo);color:#fff;font-weight:600;font-size:16px;box-shadow:0 3px 0 var(--duo-dk)}
+.step-head h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.mine{font-style:normal;font-family:var(--mono);font-size-adjust:.5;font-size:14px;font-weight:400;color:var(--duo-dk);background:var(--lav);padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:3px}
+.steps figure{margin-top:22px}
+.theme-duo #takeaways figure{max-width:620px;margin-top:28px}
+.theme-duo .quote{border-left-color:var(--duo);color:#2B3A20}
+/* mini lesson */
+.quiz{margin-top:24px;max-width:640px;background:#fff;border:2px solid #E5E5E5;border-radius:20px;padding:26px 28px}
+.quiz-top{display:flex;align-items:center;gap:16px}
+.quiz-bar{flex:1;height:14px;border-radius:999px;background:#E5E5E5;overflow:hidden}
+.quiz-bar i{display:block;height:100%;width:0;border-radius:999px;background:var(--duo);box-shadow:inset 0 -4px 0 rgba(0,0,0,.08);transition:width .5s cubic-bezier(.34,1.56,.64,1)}
+.quiz-streak{font-weight:600;color:#FF9600;font-size:16px;white-space:nowrap}
+.quiz-q{font-size:22px;font-weight:600;letter-spacing:-.01em;margin:24px 0 16px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.quiz-opts button{font:inherit;font-size:17px;text-align:left;padding:14px 16px;border-radius:14px;background:#fff;border:2px solid #E5E5E5;border-bottom-width:4px;color:var(--ink);transition:transform .15s,border-color .15s,background .15s}
+.quiz-opts button:hover{background:#F7F7F7}
+.quiz-opts button:active{transform:translateY(2px);border-bottom-width:2px}
+.quiz-opts button.sel{border-color:var(--duo-blue);background:#DDF4FF}
+.quiz-opts button.ok{border-color:var(--duo);background:#D7FFB8;color:#3C8A00}
+.quiz-opts button.no{border-color:var(--duo-red);background:#FFDFE0;color:#C33}
+.quiz-opts button .suit{font-size:22px;margin-right:8px}
+.quiz-opts button .red{color:#E5484D}
+.quiz-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;min-height:52px}
+.quiz-msg{font-size:15.5px;line-height:1.45;color:var(--soft);flex:1}
+.quiz-msg b{display:block;font-size:17px}
+.quiz-msg.good b{color:var(--duo-dk)}.quiz-msg.bad b{color:#C33}
+.quiz-next{font:inherit;font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;padding:13px 26px;border-radius:14px;border:0;color:#fff;background:var(--duo);box-shadow:0 4px 0 var(--duo-dk);transition:transform .1s,box-shadow .1s,opacity .2s}
+.quiz-next:active{transform:translateY(4px);box-shadow:0 0 0 var(--duo-dk)}
+.quiz-next:disabled{background:#E5E5E5;color:#AFAFAF;box-shadow:0 4px 0 #CFCFCF}
+.quiz.pop .quiz-streak{animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{40%{transform:scale(1.5) rotate(-8deg)}}
+/* thank-you card, Duolingo green */
+.duo-thanks{background:linear-gradient(135deg,#58CC02,#3F9A00)!important;box-shadow:0 6px 0 #2F7A00}
+.duo-thanks::after{background:#FFC800!important;opacity:.35!important}
+.duo-thanks .slogan{color:#fff}
+.duo-thanks .next{color:#E9FFD6}
+.suits{display:flex;gap:6px;flex:none;position:relative;z-index:1}
+.suits span{display:grid;place-items:center;width:52px;height:70px;border-radius:10px;background:#fff;font-size:30px;color:#1A1A1A;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.suits span:nth-child(2),.suits span:nth-child(3){color:#E5484D}
+.suits span:nth-child(1){rotate:-10deg}.suits span:nth-child(2){rotate:-3deg}.suits span:nth-child(3){rotate:4deg}.suits span:nth-child(4){rotate:11deg}
+.duo-thanks:hover .suits span{transform:translateY(-10px)}
+.duo-thanks:hover .suits span:nth-child(2){transition-delay:.05s}.duo-thanks:hover .suits span:nth-child(3){transition-delay:.1s}.duo-thanks:hover .suits span:nth-child(4){transition-delay:.15s}
+
 /* SideBy interactions */
 .has-pill [data-pill],.has-pill [data-pill] *{cursor:none}
 .zoomable{cursor:zoom-in;transition:transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .4s}
@@ -410,6 +473,10 @@ footer .cols a:hover{color:#fff}
   .takeaways li{padding-left:44px}
   .thanks{flex-direction:column;align-items:flex-start;gap:22px;padding:32px 26px}.thanks .mark{width:110px}
   .fin-grid{grid-template-columns:1fr}
+  .goal-chips{grid-template-columns:1fr}
+  .quiz{padding:20px}.quiz-opts{grid-template-columns:1fr}.quiz-foot{flex-direction:column;align-items:stretch}
+  .steps>li{padding-left:44px}.step-head{margin-left:-44px}.steps>li::before{left:17px}
+  .suits span{width:40px;height:54px;font-size:22px}
   .cs2 .next-proj{padding:96px 20px 72px}.cs2 .next-proj .tile{width:100%}
   .lately{height:60vw}
   footer .in{flex-direction:column;padding:44px 20px 36px}

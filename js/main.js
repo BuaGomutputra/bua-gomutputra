@@ -352,3 +352,42 @@ if (!document.body.classList.contains('home')) {
 
 // nav words: remember their text so the bold hover doesn't shift neighbours
 document.querySelectorAll('.nav .links a, .nav .name').forEach(a => a.dataset.text = a.textContent);
+
+// DuoPoker: mini lesson (pick, check, see why, build a streak)
+const quiz = document.querySelector('.quiz');
+if (quiz) {
+  const Q = [
+    { q: 'Which one is the ♥ suit?', o: ['<span class="suit">♠</span>Spades', '<span class="suit red">♥</span>Hearts', '<span class="suit">♣</span>Clubs', '<span class="suit red">♦</span>Diamonds'], a: 1, why: 'Hearts are the red heart shape. Diamonds are the other red suit.' },
+    { q: 'Which hand beats a flush?', o: ['A straight', 'Three of a kind', 'A full house', 'Two pair'], a: 2, why: 'A full house (three of a kind plus a pair) ranks above a flush. Straights, trips and two pair rank below it.' },
+    { q: 'In Texas Hold’em, how many cards are dealt to each player?', o: ['2', '3', '5', '7'], a: 0, why: 'Each player gets 2 private cards, then shares up to 5 community cards on the table.' },
+    { q: 'What’s the best possible hand?', o: ['Four of a kind', 'A royal flush', 'A straight flush', 'A full house'], a: 1, why: 'A royal flush (A-K-Q-J-10, all one suit) beats everything.' }
+  ];
+  const tony = ['Tony: “Not bad.”', 'Tony: “Okay, okay.”', 'Tony raises one eyebrow. That’s basically applause.'];
+  const qEl = quiz.querySelector('.quiz-q'), opts = quiz.querySelector('.quiz-opts'), msg = quiz.querySelector('.quiz-msg'), btn = quiz.querySelector('.quiz-next'), bar = quiz.querySelector('.quiz-bar i'), st = quiz.querySelector('.quiz-streak b');
+  let i = 0, pick = null, checked = false, streak = 0, done = 0;
+  const show = () => {
+    const it = Q[i]; qEl.textContent = it.q; pick = null; checked = false;
+    opts.innerHTML = it.o.map((t, k) => `<button type="button" data-k="${k}">${t}</button>`).join('');
+    msg.className = 'quiz-msg'; msg.innerHTML = 'Pick an answer.'; btn.textContent = 'Check'; btn.disabled = true;
+  };
+  opts.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b || checked) return;
+    opts.querySelectorAll('button').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); pick = +b.dataset.k; btn.disabled = false;
+  });
+  btn.addEventListener('click', () => {
+    if (!checked) {
+      if (pick === null) return;
+      checked = true; const it = Q[i], right = pick === it.a, bs = opts.querySelectorAll('button');
+      bs[it.a].classList.add('ok'); if (!right) bs[pick].classList.add('no');
+      if (right) { streak++; done++; msg.className = 'quiz-msg good'; msg.innerHTML = `<b>${streak >= 3 ? 'Three in a row! 🔥' : 'Nice!'}</b>${streak >= 3 ? tony[2] : tony[Math.min(streak - 1, 1)]}`; quiz.classList.remove('pop'); void quiz.offsetWidth; quiz.classList.add('pop'); }
+      else { streak = 0; msg.className = 'quiz-msg bad'; msg.innerHTML = `<b>Not quite.</b>${it.why}`; }
+      if (right) msg.innerHTML += `<br><span style="color:var(--soft)">${it.why}</span>`;
+      st.textContent = streak; bar.style.width = (done / Q.length * 100) + '%';
+      btn.textContent = i === Q.length - 1 ? 'Start over' : 'Continue';
+    } else {
+      if (i === Q.length - 1) { i = 0; done = 0; streak = 0; st.textContent = 0; bar.style.width = '0%'; } else i++;
+      show();
+    }
+  });
+  show();
+}
