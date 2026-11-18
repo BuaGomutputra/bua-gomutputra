@@ -6,10 +6,11 @@
 <title>Bua Gomutputra</title>
 <meta name="description" content="Bua Gomutputra — designer who engineers. Arts, Technology & the Business of Innovation at USC Iovine and Young. Based in Los Angeles.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;700&family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="sheet">
 <nav class="nav">
   <a class="name" href="index.html">Bua Gomutputra</a>
   <button class="menu-btn" aria-label="Open menu">Menu</button>
@@ -17,41 +18,73 @@
 </nav>
 
 <header class="hero">
+  <div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div>
   <h1>Bua Gomutputra</h1>
   <p class="rotator" data-phrases='["is a designer who engineers.","lives in the problem-space.","prompts, builds, and breaks.","is founding something (stay tuned)."]' aria-live="off"><span>is a designer who engineers.</span></p>
   <div class="creds"><span><b>[1]</b>Arts, Tech &amp; Business of Innovation @ USC</span><span><b>[2]</b>Based in Los Angeles</span></div>
+  <p class="status-line"><i class="dot"></i>Open to work <span class="sep">·</span> <span data-la>LA</span></p>
 </header>
 
 <main id="work">
   <section class="grid">
     <div class="col">
-      <a class="tile r32" href="sideby.html"><img src="images/sideby/hero.jpg" alt="SideBy" data-label="SideBy"><span class="cap">SideBy →</span></a>
-      <div class="tile soon r43"><small>JIM THOMPSON</small><span>Coming soon</span></div>
+      <a class="proj" href="sideby.html">
+        <div class="pm r32"><img src="images/sideby/hero.jpg" alt="SideBy" data-label="SideBy"></div>
+        <div class="meta"><h3>SideBy</h3><span class="status">Concept · 2026</span></div>
+        <p class="line">A second pair of eyes for conversations that start to feel off.</p>
+      </a>
+      <div class="proj soon">
+        <div class="pm r43"></div>
+        <div class="meta"><h3>Jim Thompson</h3><span class="status">Coming soon</span></div>
+      </div>
     </div>
     <div class="col">
-      <a class="tile r32" href="duolingo-poker.html"><img src="images/duolingo-poker/cover.jpg" alt="Duolingo Poker" data-label="Duolingo Poker"><span class="cap">Duolingo Poker →</span></a>
-      <a class="tile r43" href="ecopinet.html"><img src="images/ecopinet/cover.jpg" alt="EcoPinet" data-label="EcoPinet"><span class="cap">EcoPinet →</span></a>
+      <a class="proj" href="duolingo-poker.html">
+        <div class="pm r32"><img src="images/duolingo-poker/cover.jpg" alt="DuoPoker" data-label="DuoPoker"></div>
+        <div class="meta"><h3>DuoPoker</h3><span class="status">Concept · 2026</span></div>
+        <p class="line">Poker on Duolingo, taught by a dealer who has seen every hand.</p>
+      </a>
+      <a class="proj" href="ecopinet.html">
+        <div class="pm r43"><img src="images/ecopinet/cover.jpg" alt="EcoPinet" data-label="EcoPinet"></div>
+        <div class="meta"><h3>EcoPinet</h3><span class="status">Piloted · 2025</span></div>
+        <p class="line">Packaging made from pineapple waste, with seeds inside.</p>
+      </a>
     </div>
     <div class="col">
-      <div class="tile soon r43"><small>BUZZTILE</small><span>Coming soon</span></div>
-      <div class="tile soon r32"><small>PTT EV STATION</small><span>Coming soon</span></div>
+      <div class="proj soon">
+        <div class="pm r43"></div>
+        <div class="meta"><h3>BuzzTile</h3><span class="status">Coming soon</span></div>
+      </div>
+      <div class="proj soon">
+        <div class="pm r32"></div>
+        <div class="meta"><h3>PTT EV Station</h3><span class="status">Coming soon</span></div>
+      </div>
     </div>
   </section>
 
   <section class="building">
     <h2>Currently building</h2>
     <div class="row">
-      <div class="tile soon"><small>EMBER ANALYTICS · IN PROGRESS</small><span>More soon</span></div>
-      <div class="tile soon"><small>FRUIT AI · HIGHER ED · IN PROGRESS</small><span>More soon</span></div>
+      <div class="proj soon">
+        <div class="pm r21"></div>
+        <div class="meta"><h3>Ripple Analytics</h3><span class="status"><i class="dot"></i>Shipping · 2026</span></div>
+      </div>
+      <div class="proj soon">
+        <div class="pm r21"></div>
+        <div class="meta"><h3>Fruit AI</h3><span class="status"><i class="dot"></i>Shipping · 2026</span></div>
+        <p class="line">Turning university research into products people can test.</p>
+      </div>
     </div>
   </section>
 </main>
 
+</div>
+
 <footer>
   <div class="in">
-    <div><h2>See you around ✦</h2><p class="upd">Last updated Nov 2026</p></div>
+    <div><h2>See you around :)</h2><p class="upd">Last updated Nov 2026</p></div>
     <div class="cols">
-      <div><h5>Say hello</h5><a href="#">LinkedIn</a><a href="#">Email</a><a href="#">Instagram</a></div>
+      <div><h5>Say hi!</h5><a href="#">LinkedIn</a><a href="#">Email</a><a href="#">Instagram</a></div>
       <div><h5>Navigation</h5><a href="index.html#work">Work</a><a href="about.html">About</a><a href="resume.pdf">Resume</a></div>
     </div>
   </div>

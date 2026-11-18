@@ -42,6 +42,13 @@ if (clock) {
   tick(); setInterval(tick, 30000);
 }
 
+// Home status line: live LA time
+const la = document.querySelector('[data-la]');
+if (la) {
+  const tick = () => la.textContent = 'LA ' + new Date().toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' });
+  tick(); setInterval(tick, 30000);
+}
+
 // Carousel
 document.querySelectorAll('.carousel').forEach(c => {
   const track = c.querySelector('.track'), wrap = c.querySelector('.track-wrap');
