@@ -534,7 +534,8 @@ const play = document.querySelector('.play');
 if (play) {
   const svg = play.querySelector('.comb'), NS = 'http://www.w3.org/2000/svg';
   const lcdSteps = play.querySelector('.lcd-steps'), lcd = play.querySelector('.lcd');
-  const voltV = play.querySelector('.volt-v'), voltBar = play.querySelector('.volt-bar'), voltFill = voltBar.querySelector('i');
+  const voltV = play.querySelector('.volt-v'), spikes = play.querySelector('.spikes');
+  const bars = Array.from({ length: 24 }, () => spikes.appendChild(document.createElement('i')));
   const hive = play.querySelector('.hive'), beesEl = play.querySelector('.bees'), msg = play.querySelector('.hive-msg');
   const unlocks = [...play.querySelectorAll('.bee-list li')];
   const R = 66, H = Math.sqrt(3) * R;
@@ -570,8 +571,9 @@ if (play) {
     t.setAttribute('x', x); t.setAttribute('y', y + 8); t.textContent = '+1'; svg.appendChild(t); setTimeout(() => t.remove(), 900);
     lcdSteps.textContent = steps; lcd.classList.add('flash'); setTimeout(() => lcd.classList.remove('flash'), 120);
     voltV.textContent = v.toFixed(1) + ' V';
-    voltBar.classList.remove('decay'); voltFill.style.width = (v / 5 * 100) + '%';
-    requestAnimationFrame(() => requestAnimationFrame(() => { voltBar.classList.add('decay'); voltFill.style.width = '0%'; }));
+    const b = bars.shift(); b.remove(); spikes.appendChild(b); bars.push(b);
+    b.style.height = '6%'; b.classList.add('hot'); requestAnimationFrame(() => { b.style.height = (v / 5 * 100) + '%'; });
+    setTimeout(() => b.classList.remove('hot'), 900);
     if (steps % 5 === 0 && beeCount < 14) { beeCount++; addBee(); hive.classList.add('grow'); setTimeout(() => hive.classList.remove('grow'), 400); }
     const got = unlocks.find(li => +li.dataset.at === steps);
     if (got) { got.classList.add('got'); msg.textContent = `New bee unlocked: ${got.childNodes[1].textContent.trim()}!`; }
@@ -585,7 +587,42 @@ if (play) {
     walking = false;
   });
   play.querySelector('.hive-reset').addEventListener('click', () => {
-    steps = beeCount = 0; lcdSteps.textContent = '0'; voltV.textContent = '0.0 V'; voltFill.style.width = '0%';
+    steps = beeCount = 0; lcdSteps.textContent = '0'; voltV.textContent = '0.0 V'; bars.forEach(b => b.style.height = '6%');
     beesEl.replaceChildren(); unlocks.forEach(li => li.classList.remove('got')); msg.textContent = 'Step on a tile to wake the hive.';
   });
+}
+
+// BuzzTile: ideation rounds
+document.querySelectorAll('.rounds').forEach(r => {
+  const tabs = [...r.querySelectorAll('[data-r]')], ps = [...r.querySelectorAll('.r-panel')];
+  tabs.forEach(b => b.addEventListener('click', () => { tabs.forEach(x => x.setAttribute('aria-selected', x === b)); ps.forEach((p, i) => p.classList.toggle('on', i === +b.dataset.r)); }));
+});
+
+// BuzzTile: press-and-hold piezo demo
+const pz = document.querySelector('.pz');
+if (pz) {
+  const vEl = pz.querySelector('.pz-v'), fill = pz.querySelector('.pz-read>i>i'), btn = pz.querySelector('.pz-btn');
+  let v = 0, target = 0, raf = null;
+  const tick = () => { v += (target - v) * .12; vEl.textContent = v.toFixed(1) + ' V'; fill.style.width = (v / 5 * 100) + '%'; raf = Math.abs(target - v) > .02 ? requestAnimationFrame(tick) : null; if (!raf) { v = target; vEl.textContent = v.toFixed(1) + ' V'; } };
+  const set = on => { pz.classList.toggle('on', on); target = on ? 4 + Math.random() : 0; if (!raf) raf = requestAnimationFrame(tick); };
+  [btn, pz.querySelector('.pz-svg')].forEach(el => {
+    el.addEventListener('pointerdown', e => { e.preventDefault(); set(true); });
+    el.addEventListener('pointerup', () => set(false)); el.addEventListener('pointerleave', () => set(false)); el.addEventListener('pointercancel', () => set(false));
+  });
+  btn.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); set(true); } });
+  btn.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') set(false); });
+}
+
+// BuzzTile: app viewer (sketch -> final screen)
+const av = document.querySelector('.appview');
+if (av) {
+  const tabs = [...av.querySelectorAll('[data-a]')], stage = av.querySelector('.av-stage');
+  const sk = av.querySelector('.av-sketch img'), ph = av.querySelector('.av-phone img');
+  const names = ['the Hive screen', 'the Learning hub', 'the Bee collection', 'School stats'];
+  for (let i = 1; i <= 4; i++) { new Image().src = `images/buzztile/screen-${i}.jpg`; new Image().src = `images/buzztile/sketch-${i}.jpg`; }
+  tabs.forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.a; tabs.forEach(x => x.setAttribute('aria-selected', x === b));
+    stage.classList.add('swap');
+    setTimeout(() => { sk.src = `images/buzztile/sketch-${i + 1}.jpg`; ph.src = `images/buzztile/screen-${i + 1}.jpg`; sk.alt = `Hand-drawn sketch of ${names[i]}`; ph.alt = `Final app: ${names[i]}`; stage.classList.remove('swap'); }, 220);
+  }));
 }
