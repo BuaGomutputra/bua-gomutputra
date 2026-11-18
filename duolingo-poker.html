@@ -7,7 +7,7 @@
 <meta name="description" content="Duolingo Poker: a beginner poker course concept for Duolingo, taught by Tony. Team project.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;700&family=Goudy+Bookletter+1911&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=1794989709">
+<link rel="stylesheet" href="css/style.css?v=1794990106">
 </head>
 <body class="theme-duo cs2">
 <div class="sheet">
@@ -107,11 +107,10 @@
         <div class="prose">
           <p>Just like a real Duolingo lesson, it starts with the basics and builds up. You start by matching suits, with a breakdown of poker hands one tap away. Tony reacts to your picks, and if you get three right in a row, his reaction gets bigger. A wrong answer doesn’t just get marked wrong: the lesson shows why the right one is right.</p>
         </div>
-        <div class="duo2 fig">
-          <img src="images/duolingo-poker/lesson-suits.jpg" alt="Lesson screen: match the suits" data-label="duolingo-poker/lesson-suits.jpg" style="aspect-ratio:16/9">
-          <img src="images/duolingo-poker/lesson-mistake.jpg" alt="Lesson screen: a wrong answer, explained" data-label="duolingo-poker/lesson-mistake.jpg" style="aspect-ratio:16/9">
+        <div class="phones">
+          <figure><img src="images/duolingo-poker/phone-suits.jpg" alt="Lesson screen: match the suits" data-label="phone-suits.jpg"><figcaption>Match the suits</figcaption></figure>
+          <figure><img src="images/duolingo-poker/phone-mistake.jpg" alt="Lesson screen: a wrong answer, explained" data-label="phone-mistake.jpg"><figcaption>A wrong answer shows why</figcaption></figure>
         </div>
-        <p class="figcap">Matching suits, and what happens when you get one wrong.</p>
       </li>
     </ol>
   </section>
@@ -119,13 +118,26 @@
   <!-- 05 Try it -->
   <section class="blk reveal" id="try">
     <p class="lab">05 · TRY THE LESSON</p>
-    <h2>Try a mini version</h2>
-    <div class="prose"><p>A small recreation of how our lesson works: pick an answer, see why, and build a streak.</p></div>
-    <div class="quiz" aria-live="polite">
-      <div class="quiz-top"><div class="quiz-bar"><i></i></div><span class="quiz-streak" title="Streak">🔥 <b>0</b></span></div>
-      <p class="quiz-q"></p>
-      <div class="quiz-opts"></div>
-      <div class="quiz-foot"><p class="quiz-msg"></p><button class="quiz-next" type="button">Check</button></div>
+    <h2>Play the lesson</h2>
+    <div class="try-row">
+      <div class="prose try-copy">
+        <p>A playable recreation of our prototype, built from the screens in our pitch.</p>
+        <ol class="try-list">
+          <li><b>Match the suits.</b> Tap a card, then its suit.</li>
+          <li><b>Spot the hand.</b> Pick one, then check.</li>
+          <li><b>Build a streak.</b> Three right in a row and Tony actually reacts.</li>
+        </ol>
+        <p class="note">Wrong answers cost a heart, and show why the right one is right.</p>
+      </div>
+      <div class="device" aria-label="Playable Duolingo Poker lesson">
+        <div class="device-screen">
+          <div class="d-status"><span>9:41</span><i class="d-cam"></i><span class="d-icons">▂▄▆ ◔ ▭</span></div>
+          <div class="d-top"><button class="d-x" type="button" aria-label="Restart lesson">✕</button><div class="d-bar"><i></i></div><span class="d-hint" aria-hidden="true">▤</span><span class="d-hearts">❤️ <b>5</b></span></div>
+          <div class="d-tony"><img src="images/duolingo-poker/tony-table.jpg" alt="Tony the dealer"><p class="d-say" aria-live="polite"></p></div>
+          <div class="d-body" aria-live="polite"></div>
+          <div class="d-foot"><p class="d-msg"></p><button class="d-btn" type="button">Check</button></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -166,6 +178,6 @@
     </div>
   </div>
 </footer>
-<script src="js/main.js?v=1794989459"></script>
+<script src="js/main.js?v=1794990087"></script>
 </body>
 </html>

@@ -138,7 +138,7 @@ if (zoomables.length) {
 }
 
 // Magnifying glass: a round lens follows the mouse over project images and zooms in (mouse only)
-if (zoomables.length && matchMedia('(hover: hover)').matches) {
+if (zoomables.length && matchMedia('(hover: hover)').matches && !document.body.classList.contains('theme-duo')) {
   const lens = document.createElement('div'); lens.className = 'lens'; lens.setAttribute('aria-hidden', 'true'); document.body.appendChild(lens);
   const Z = 1.6, R = 120;
   const posOf = v => v.endsWith('%') ? parseFloat(v) / 100 : (v === 'left' || v === 'top') ? 0 : (v === 'right' || v === 'bottom') ? 1 : .5;
@@ -353,41 +353,77 @@ if (!document.body.classList.contains('home')) {
 // nav words: remember their text so the bold hover doesn't shift neighbours
 document.querySelectorAll('.nav .links a, .nav .name').forEach(a => a.dataset.text = a.textContent);
 
-// DuoPoker: mini lesson (pick, check, see why, build a streak)
-const quiz = document.querySelector('.quiz');
-if (quiz) {
-  const Q = [
-    { q: 'Which one is the ♥ suit?', o: ['<span class="suit">♠</span>Spades', '<span class="suit red">♥</span>Hearts', '<span class="suit">♣</span>Clubs', '<span class="suit red">♦</span>Diamonds'], a: 1, why: 'Hearts are the red heart shape. Diamonds are the other red suit.' },
-    { q: 'Which hand beats a flush?', o: ['A straight', 'Three of a kind', 'A full house', 'Two pair'], a: 2, why: 'A full house (three of a kind plus a pair) ranks above a flush. Straights, trips and two pair rank below it.' },
-    { q: 'In Texas Hold’em, how many cards are dealt to each player?', o: ['2', '3', '5', '7'], a: 0, why: 'Each player gets 2 private cards, then shares up to 5 community cards on the table.' },
-    { q: 'What’s the best possible hand?', o: ['Four of a kind', 'A royal flush', 'A straight flush', 'A full house'], a: 1, why: 'A royal flush (A-K-Q-J-10, all one suit) beats everything.' }
+
+// DuoPoker: playable lesson inside a phone, modelled on the pitch prototype
+const dev = document.querySelector('.device-screen');
+if (dev) {
+  const $ = s => dev.querySelector(s);
+  const body = $('.d-body'), foot = $('.d-foot'), msg = $('.d-msg'), btn = $('.d-btn'), bar = $('.d-bar i'), hearts = $('.d-hearts b'), heartsEl = $('.d-hearts'), tony = $('.d-tony'), say = $('.d-say');
+  const C = (v, s) => `<span class="d-card${s === '♥' || s === '♦' ? ' r' : ''}">${v}<br>${s}</span>`;
+  const H = cards => `<span class="d-hand">${cards.map(([v, s]) => C(v, s)).join('')}</span>`;
+  const STEPS = [
+    { type: 'match', q: 'Match the suits.', pairs: [['K', '♣', 'Clubs'], ['7', '♥', 'Hearts'], ['Q', '♠', 'Spades'], ['3', '♦', 'Diamonds']] },
+    { type: 'pick', q: 'Which one is a flush?', a: 2, why: 'Same suit, all five.', name: 'flush', opts: [
+      { tag: 'Straight', h: [['9', '♣'], ['10', '♦'], ['J', '♥'], ['Q', '♠'], ['K', '♣']] },
+      { tag: 'High card', h: [['2', '♥'], ['7', '♦'], ['9', '♣'], ['J', '♠'], ['K', '♥']] },
+      { tag: 'Flush', h: [['2', '♥'], ['7', '♥'], ['9', '♥'], ['J', '♥'], ['K', '♥']] } ] },
+    { type: 'pick', q: 'Which one is a pair?', a: 0, why: 'Two cards of the same rank.', name: 'pair', opts: [
+      { tag: 'Pair', h: [['7', '♠'], ['7', '♦'], ['K', '♣'], ['4', '♥'], ['2', '♠']] },
+      { tag: 'High card', h: [['3', '♣'], ['8', '♦'], ['10', '♥'], ['Q', '♠'], ['A', '♣']] },
+      { tag: 'Flush', h: [['3', '♠'], ['6', '♠'], ['9', '♠'], ['J', '♠'], ['A', '♠']] } ] }
   ];
-  const tony = ['Tony: “Not bad.”', 'Tony: “Okay, okay.”', 'Tony raises one eyebrow. That’s basically applause.'];
-  const qEl = quiz.querySelector('.quiz-q'), opts = quiz.querySelector('.quiz-opts'), msg = quiz.querySelector('.quiz-msg'), btn = quiz.querySelector('.quiz-next'), bar = quiz.querySelector('.quiz-bar i'), st = quiz.querySelector('.quiz-streak b');
-  let i = 0, pick = null, checked = false, streak = 0, done = 0;
-  const show = () => {
-    const it = Q[i]; qEl.textContent = it.q; pick = null; checked = false;
-    opts.innerHTML = it.o.map((t, k) => `<button type="button" data-k="${k}">${t}</button>`).join('');
-    msg.className = 'quiz-msg'; msg.innerHTML = 'Pick an answer.'; btn.textContent = 'Check'; btn.disabled = true;
-  };
-  opts.addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b || checked) return;
-    opts.querySelectorAll('button').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); pick = +b.dataset.k; btn.disabled = false;
-  });
-  btn.addEventListener('click', () => {
-    if (!checked) {
-      if (pick === null) return;
-      checked = true; const it = Q[i], right = pick === it.a, bs = opts.querySelectorAll('button');
-      bs[it.a].classList.add('ok'); if (!right) bs[pick].classList.add('no');
-      if (right) { streak++; done++; msg.className = 'quiz-msg good'; msg.innerHTML = `<b>${streak >= 3 ? 'Three in a row! 🔥' : 'Nice!'}</b>${streak >= 3 ? tony[2] : tony[Math.min(streak - 1, 1)]}`; quiz.classList.remove('pop'); void quiz.offsetWidth; quiz.classList.add('pop'); }
-      else { streak = 0; msg.className = 'quiz-msg bad'; msg.innerHTML = `<b>Not quite.</b>${it.why}`; }
-      if (right) msg.innerHTML += `<br><span style="color:var(--soft)">${it.why}</span>`;
-      st.textContent = streak; bar.style.width = (done / Q.length * 100) + '%';
-      btn.textContent = i === Q.length - 1 ? 'Start over' : 'Continue';
-    } else {
-      if (i === Q.length - 1) { i = 0; done = 0; streak = 0; st.textContent = 0; bar.style.width = '0%'; } else i++;
-      show();
+  let step = 0, lives = 5, streak = 0, best = 0, pick = null, checked = false;
+  const speak = (t, big) => { say.textContent = t; say.classList.add('on'); tony.classList.remove('react', 'big'); void tony.offsetWidth; tony.classList.add(big ? 'big' : 'react'); clearTimeout(speak.t); speak.t = setTimeout(() => say.classList.remove('on'), 2400); };
+  const lose = () => { lives = Math.max(0, lives - 1); hearts.textContent = lives; heartsEl.classList.remove('hit'); void heartsEl.offsetWidth; heartsEl.classList.add('hit'); streak = 0; };
+  const win = () => { streak++; best = Math.max(best, streak); if (streak >= 3) speak('…okay. I’m impressed.', true); else speak(['Not bad.', 'Hm. Again.'][streak - 1] || 'Not bad.'); };
+  const setFoot = (state, html, label, disabled) => { foot.className = 'd-foot' + (state ? ' ' + state : ''); msg.innerHTML = html || ''; btn.textContent = label; btn.disabled = !!disabled; };
+  const progress = () => bar.style.width = (step / STEPS.length * 100) + '%';
+  function render() {
+    progress(); checked = false; pick = null;
+    if (step >= STEPS.length) {
+      body.innerHTML = `<div class="d-end"><b>Lesson complete!</b><p>You’re ready for the next one.</p><div class="d-stats"><div>❤️ ${lives} left</div><div>🔥 ${best} streak</div></div></div>`;
+      setFoot('', '', 'Play again'); speak(best >= 3 ? 'Fine. You can deal.' : 'Not bad. For a beginner.', best >= 3); return;
     }
+    const st = STEPS[step];
+    if (st.type === 'match') {
+      const right = st.pairs.map(p => p[2]).sort(() => Math.random() - .5);
+      body.innerHTML = `<p class="d-q">${st.q}</p><div class="d-match">${st.pairs.map((p, i) => `<button class="d-tile" type="button" data-side="L" data-v="${p[2]}"><span class="pc${p[1] === '♥' || p[1] === '♦' ? ' r' : ''}">${p[0]}<br>${p[1]}</span></button><button class="d-tile" type="button" data-side="R" data-v="${right[i]}">${right[i]}</button>`).join('')}</div>`;
+      setFoot('', '', 'Check', true);
+      let left = 4, selL = null, selR = null, mistake = false;
+      body.querySelector('.d-match').addEventListener('click', e => {
+        const t = e.target.closest('.d-tile'); if (!t || t.classList.contains('done')) return;
+        const side = t.dataset.side;
+        body.querySelectorAll(`.d-tile[data-side="${side}"]`).forEach(x => x.classList.remove('sel'));
+        t.classList.add('sel'); if (side === 'L') selL = t; else selR = t;
+        if (selL && selR) {
+          if (selL.dataset.v === selR.dataset.v) { [selL, selR].forEach(x => { x.classList.remove('sel'); x.classList.add('done'); }); left--; }
+          else { const a = selL, b = selR; [a, b].forEach(x => { x.classList.remove('sel'); x.classList.add('bad'); }); setTimeout(() => [a, b].forEach(x => x.classList.remove('bad')), 450); if (!mistake) { mistake = true; lose(); } }
+          selL = selR = null;
+          if (!left) { checked = true; if (mistake) { setFoot('bad', 'All matched<small>One slip cost a heart. ♥ and ♦ are red, ♠ and ♣ are black.</small>', 'Continue'); } else { win(); setFoot('good', 'Nice!<small>All four suits matched.</small>', 'Continue'); } }
+        }
+      });
+    } else {
+      body.innerHTML = `<p class="d-q">${st.q}</p><div class="d-opts">${st.opts.map((o, i) => `<button class="d-opt" type="button" data-i="${i}"><span class="k">${'ABC'[i]}</span>${H(o.h)}<span class="d-tag">${o.tag}</span></button>`).join('')}</div>`;
+      setFoot('', '', 'Check', true);
+      body.querySelector('.d-opts').addEventListener('click', e => {
+        const o = e.target.closest('.d-opt'); if (!o || checked) return;
+        body.querySelectorAll('.d-opt').forEach(x => x.classList.remove('sel')); o.classList.add('sel'); pick = +o.dataset.i; btn.disabled = false;
+      });
+    }
+  }
+  btn.addEventListener('click', () => {
+    if (step >= STEPS.length) { step = 0; lives = 5; streak = 0; best = 0; hearts.textContent = 5; render(); return; }
+    const st = STEPS[step];
+    if (st.type === 'pick' && !checked) {
+      if (pick === null) return; checked = true;
+      const os = body.querySelectorAll('.d-opt'); os[st.a].classList.add('ok'); body.querySelector('.d-opts').classList.add('shown');
+      os.forEach((x, i) => { x.classList.remove('sel'); if (i !== st.a) x.classList.add('no'); });
+      if (pick === st.a) { win(); setFoot('good', `Nice!<small>${st.why}</small>`, 'Continue'); }
+      else { lose(); setFoot('bad', `Correct answer: ${'ABC'[st.a]}, ${st.name}<small>${st.why}</small>`, 'Got it'); speak('Happens to everyone.'); }
+      return;
+    }
+    if (checked) { step++; render(); }
   });
-  show();
+  $('.d-x').addEventListener('click', () => { step = 0; lives = 5; streak = 0; best = 0; hearts.textContent = 5; render(); });
+  render();
 }
