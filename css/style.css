@@ -59,7 +59,20 @@ a.slot:hover img{transform:scale(1.03)}
 .slot .tag{z-index:2}
 .slot .tag{position:absolute;left:12px;bottom:12px;padding:6px 10px;background:rgba(251,251,251,.94);font-family:var(--mono);font-size:12px;color:var(--muted);opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
 .slot .tag b{color:var(--ink);font-weight:500;margin-right:6px}
-a.slot:hover .tag,a.slot:focus-visible .tag{opacity:1;transform:none}
+a.slot:focus-visible .tag{opacity:1;transform:none}
+@media (hover:none){a.slot .tag{opacity:1;transform:none}}
+
+/* project hover: the flower cursor stretches into a pill with a message */
+@media (hover:hover){.has-pill a.slot,.has-pill a.slot *{cursor:none}}
+.cursor-pill{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;display:flex;align-items:center;height:36px;padding:0 7px;border-radius:18px;background:rgba(251,251,251,.96);box-shadow:0 6px 20px rgba(20,20,20,.12),0 1px 2px rgba(20,20,20,.08);opacity:0;scale:.6;transition:opacity .18s ease,scale .3s cubic-bezier(.34,1.56,.64,1);will-change:transform}
+.cursor-pill svg{width:22px;height:22px;flex:none;fill:var(--blue)}
+.cursor-pill span{display:block;max-width:0;overflow:hidden;white-space:nowrap;font-size:14px;font-weight:500;color:var(--blue-text);transition:max-width .35s cubic-bezier(.2,.8,.2,1),padding .35s}
+.cursor-pill.on{opacity:1;scale:1}
+.cursor-pill.on span{max-width:200px;padding:0 6px 0 8px}
+
+/* tiles bounce in as they scroll into view */
+.js-anim .slot{opacity:0;transform:translateY(36px) scale(.94)}
+.js-anim .slot.in{opacity:1;transform:none;transition:opacity .45s ease,transform .75s cubic-bezier(.34,1.56,.64,1)}
 
 /* case study */
 .cs-head{padding:88px var(--pad) 28px;max-width:var(--max);margin:0 auto}
