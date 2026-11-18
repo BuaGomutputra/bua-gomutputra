@@ -230,8 +230,11 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 
 /* SideBy interactions */
 .has-pill [data-pill],.has-pill [data-pill] *{cursor:none}
-.cs2 .zoomable{cursor:zoom-in;transition:transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .4s}
-@media (hover:hover){.cs2 .zoomable:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(22,19,63,.18)}}
+.zoomable{cursor:zoom-in;transition:transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .4s}
+.lens{position:fixed;left:0;top:0;width:200px;height:200px;border-radius:50%;pointer-events:none;z-index:1400;background-color:#fff;background-repeat:no-repeat;border:3px solid #fff;box-shadow:0 12px 34px rgba(20,20,20,.28),0 0 0 1px rgba(20,20,20,.08);opacity:0;scale:.6;transition:opacity .18s ease,scale .3s cubic-bezier(.34,1.56,.64,1)}
+.lens.on{opacity:1;scale:1}
+.lens::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;border:1.5px solid rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(20,20,20,.25)}
+@media (hover:hover){.zoomable{cursor:none}}
 .lightbox{position:fixed;inset:0;z-index:1500;background:rgba(14,12,40,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:4vw;opacity:0;pointer-events:none;transition:opacity .25s}
 .lightbox.on{opacity:1;pointer-events:auto;cursor:zoom-out}
 .lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.4);transform:scale(.94);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}

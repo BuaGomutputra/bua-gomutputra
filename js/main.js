@@ -122,19 +122,45 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 document.querySelectorAll('.ending, .reveal').forEach(el => reduce ? el.classList.add('seen') : io.observe(el));
 
 // Case study: click any image to see it big (lightbox)
-const zoomables = document.querySelectorAll('.cs2 .blk figure img, .cs2 .fig img, .cs2 .card img, .cs2 .hero-img');
+const zoomables = document.querySelectorAll('.cs2 .blk figure img, .cs2 .fig img, .cs2 .card img, .cs2 .hero-img, .cs-head ~ .media img, .section img');
 if (zoomables.length) {
   const lb = document.createElement('div'); lb.className = 'lightbox'; lb.innerHTML = '<img alt=""><p>Click anywhere or press Esc to close</p>'; document.body.appendChild(lb);
   const big = lb.querySelector('img');
   const close = () => lb.classList.remove('on');
   zoomables.forEach(img => {
-    img.classList.add('zoomable'); img.dataset.pill = 'Enlarge'; img.tabIndex = 0;
+    img.classList.add('zoomable'); img.tabIndex = 0;
     const open = () => { big.src = img.currentSrc || img.src; big.alt = img.alt; lb.classList.add('on'); };
     img.addEventListener('click', open);
     img.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
   });
   lb.addEventListener('click', close);
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+}
+
+// Magnifying glass: a round lens follows the mouse over project images and zooms in (mouse only)
+if (zoomables.length && matchMedia('(hover: hover)').matches) {
+  const lens = document.createElement('div'); lens.className = 'lens'; lens.setAttribute('aria-hidden', 'true'); document.body.appendChild(lens);
+  const Z = 2.2, R = 100;
+  const posOf = v => v.endsWith('%') ? parseFloat(v) / 100 : (v === 'left' || v === 'top') ? 0 : (v === 'right' || v === 'bottom') ? 1 : .5;
+  zoomables.forEach(img => {
+    let geo = null;
+    const measure = () => {
+      const r = img.getBoundingClientRect(), iw = img.naturalWidth, ih = img.naturalHeight; if (!iw) return null;
+      const cs = getComputedStyle(img), fit = cs.objectFit, [px, py = '50%'] = cs.objectPosition.split(' ');
+      const s = fit === 'contain' ? Math.min(r.width / iw, r.height / ih) : fit === 'fill' ? null : Math.max(r.width / iw, r.height / ih);
+      const dw = s ? iw * s : r.width, dh = s ? ih * s : r.height;
+      return { r, dw, dh, ox: (r.width - dw) * posOf(px), oy: (r.height - dh) * posOf(py) };
+    };
+    img.addEventListener('pointerenter', e => { if (e.pointerType !== 'mouse') return; geo = measure(); if (!geo) return; lens.style.backgroundImage = `url("${img.currentSrc || img.src}")`; lens.style.backgroundSize = `${geo.dw * Z}px ${geo.dh * Z}px`; lens.classList.add('on'); });
+    img.addEventListener('pointermove', e => {
+      if (!geo) return; geo.r = img.getBoundingClientRect();
+      const x = e.clientX - geo.r.left - geo.ox, y = e.clientY - geo.r.top - geo.oy;
+      lens.style.transform = `translate3d(${e.clientX - R}px, ${e.clientY - R}px, 0)`;
+      lens.style.backgroundPosition = `${R - x * Z}px ${R - y * Z}px`;
+    });
+    img.addEventListener('pointerleave', () => { geo = null; lens.classList.remove('on'); });
+  });
+  addEventListener('scroll', () => lens.classList.remove('on'), { passive: true });
 }
 
 // Project tiles: flower cursor grows into a "View <project>" pill (mouse only)
