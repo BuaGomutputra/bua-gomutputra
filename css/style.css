@@ -488,8 +488,12 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .theme-eco .eco-links+.mypart{margin-top:24px}
 /* decision notes: tape sticks out past the card; green-yellow glow */
 .theme-eco .notes>div{overflow:visible}
-.theme-eco .notes>div::before{top:-11px;left:-14px;width:70px;height:20px;background:rgba(182,238,140,.75);transform:rotate(-32deg)}
-.theme-eco .notes>div::after{content:""!important;position:absolute;inset:auto!important;top:-11px!important;right:-14px!important;width:70px;height:20px;background:rgba(255,217,90,.75)!important;transform:rotate(30deg);opacity:1!important;border-radius:0;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.theme-eco .notes>div::after{display:none!important}
+.theme-eco .notes>div::before{width:var(--tw,64px);height:19px;top:var(--tt,-10px);left:var(--tl,auto);right:var(--tr,auto);margin:0;background:var(--tc,rgba(182,238,140,.75));transform:rotate(var(--ta,-6deg))}
+.theme-eco .notes>div:nth-child(1){--tl:-12px;--ta:-34deg;--tw:66px}
+.theme-eco .notes>div:nth-child(2){--tl:46%;--tt:-12px;--ta:4deg;--tw:84px;--tc:rgba(255,217,90,.75)}
+.theme-eco .notes>div:nth-child(3){--tr:-16px;--tt:18px;--ta:72deg;--tw:58px;--tc:rgba(255,217,90,.75)}
+.theme-eco .notes>div:nth-child(4){--tr:22%;--tt:-11px;--ta:-9deg;--tw:72px}
 .theme-eco .tilt-group>div:not(.notes>div)::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,217,90,.22),transparent 60%)!important}
 .theme-eco .notes>div:hover{box-shadow:0 0 0 2px rgba(255,217,90,.6),0 14px 30px rgba(30,59,37,.14)}
 /* app: room for all three phones */
