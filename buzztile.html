@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BuzzTile — Bua Gomutputra</title>
+<meta name="description" content="BuzzTile: a honeycomb floor tile that turns footsteps into renewable energy, with a gamified app that makes it visible. Solo EPQ project.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;700&family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=1795043196">
+</head>
+<body class="theme-buzz cs2">
+<div class="sheet">
+<nav class="nav">
+  <a class="name" href="index.html">Bua Gomutputra</a>
+  <button class="menu-btn" aria-label="Open menu">Menu</button>
+  <div class="links"><a href="index.html#work" class="on">Work</a><a href="about.html">About</a><a href="resume.pdf" target="_blank">Resume ↗</a></div>
+</nav>
+
+<div class="cs-wrap">
+  <aside class="toc" aria-label="On this page">
+    <ol>
+      <li><a href="#overview"><span>01</span>BuzzTile</a></li>
+      <li><a href="#problem"><span>02</span>The problem</a></li>
+      <li><a href="#research"><span>03</span>Research</a></li>
+      <li><a href="#ideas"><span>04</span>Ideation</a></li>
+      <li><a href="#build"><span>05</span>Building it</a></li>
+      <li><a href="#try"><span>06</span>Step on it</a></li>
+      <li><a href="#app"><span>07</span>The app</a></li>
+      <li><a href="#testing"><span>08</span>Testing</a></li>
+      <li><a href="#takeaways"><span>09</span>Takeaways</a></li>
+      <li><a href="#thanks"><span>10</span>More work</a></li>
+    </ol>
+  </aside>
+
+  <main class="cs-main">
+
+  <!-- 01 Overview -->
+  <header class="cs-landing" id="overview">
+    <p class="eyebrow">BUZZTILE · EXTENDED PROJECT QUALIFICATION (EPQ) · SOLO PROJECT</p>
+    <h1>BuzzTile</h1>
+    <p class="lede"><em>Can we walk our way into a greener future?</em> A honeycomb floor tile that turns footsteps into renewable energy, and an app that turns that energy into a game.</p>
+    <img class="hero-img" src="images/buzztile/field-wide.jpg" alt="The BuzzTile prototype on the school field: seven wooden hexagon tiles and an engraved display stand" data-label="buzztile/field-wide.jpg" style="aspect-ratio:16/9;object-position:center 62%">
+    <dl class="facts">
+      <div><dt>ROLE</dt><dd>Everything: research, circuit, code, CAD, fabrication, app</dd></div>
+      <div><dt>TIMELINE</dt><dd>2025</dd></div>
+      <div><dt>TYPE</dt><dd>Extended Project Qualification (EPQ)</dd></div>
+      <div><dt>SKILLS</dt><dd>Circuit design · ESP32 &amp; C++ · Fusion 360 · CNC &amp; laser cutting · HTML, CSS, JS · Gamification</dd></div>
+    </dl>
+    <div class="mypart">
+      <h4>WHAT I MADE</h4>
+      <ul>
+        <li>A 1:7 scale floor mat of seven hexagon tiles with piezoelectric sensors inside</li>
+        <li>An ESP32 circuit that counts every step and shows it live on an LCD</li>
+        <li>A web app where your steps grow a beehive, unlock bees, and add up for the whole school</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- 02 Problem -->
+  <section class="blk reveal" id="problem">
+    <p class="lab">02 · THE PROBLEM</p>
+    <h2>Sustainability feels invisible</h2>
+    <div class="prose">
+      <p>Everyone learns about climate change in school, but almost no one has ever <em>seen</em> a greenhouse gas or felt their carbon footprint. The causes stay invisible, and the problem feels so big that it’s hard to believe one person can make a difference.</p>
+      <p>At my school, sustainability was a few pages in a textbook. Being told to recycle and turn off the lights wasn’t going to spark real change. So I asked: what if a footstep, something everyone does all day, could make energy you can actually see?</p>
+    </div>
+    <p class="lab sub-lab">MY DESIGN BRIEF</p>
+    <ol class="brief">
+      <li><i aria-hidden="true"></i><b>Make energy from footsteps</b><span>Convert steps into measurable electrical energy.</span></li>
+      <li><i aria-hidden="true"></i><b>Show it in real time</b><span>Detect each step and display the data instantly.</span></li>
+      <li><i aria-hidden="true"></i><b>Easy and fun to use</b><span>An engaging, intuitive interface for ages 6–18.</span></li>
+      <li><i aria-hidden="true"></i><b>Spark curiosity</b><span>Get people asking questions about sustainability.</span></li>
+    </ol>
+  </section>
+
+  <!-- 03 Research -->
+  <section class="blk reveal" id="research">
+    <p class="lab">03 · RESEARCH</p>
+    <h2>Why piezoelectric?</h2>
+    <div class="prose">
+      <p>I researched three areas: energy-harvesting technologies, piezoelectric circuits, and gamification in education. I compared four ways to turn motion into electricity:</p>
+    </div>
+    <div class="tech" aria-label="Energy harvesting technologies compared">
+      <div class="tech-tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-t="0">Piezoelectric <em>chosen</em></button>
+        <button role="tab" aria-selected="false" data-t="1">Electromagnetic</button>
+        <button role="tab" aria-selected="false" data-t="2">Pneumatic</button>
+        <button role="tab" aria-selected="false" data-t="3">Quantum tunnelling</button>
+      </div>
+      <div class="tech-panels">
+        <div class="tp on"><p class="how">Pressing a crystal separates its positive and negative charges, so stress becomes electricity directly.</p><p><b>Why it won:</b> no extra moving parts, small, cheap, easy to find, and well documented. Perfect for a small prototype.</p><p class="con"><b>Trade-off:</b> the sensors wear down under repeated impact.</p></div>
+        <div class="tp"><p class="how">A footstep moves a magnet past a coil, inducing a current. This is how Pavegen’s tiles work.</p><p><b>Why not:</b> proven in public spaces, but it needs many mechanical parts and expensive installation.</p></div>
+        <div class="tp"><p class="how">Steps compress air, which drives a generator.</p><p><b>Why not:</b> the highest efficiency of the four, but the pumps are bulky and the system is complex for a prototype.</p></div>
+        <div class="tp"><p class="how">Pressure lets electrons cross an insulating barrier, changing resistance.</p><p><b>Why not:</b> output is only microvolts, so it works as a pressure sensor, not a power source.</p></div>
+      </div>
+    </div>
+    <div class="prose">
+      <p>The piezo circuits I found all used a bridge rectifier and capacitor to steady the voltage, but they only measured power. None of them gave people anything to interact with. That gap became my project: keep the proven circuit, and add a reason to keep stepping.</p>
+    </div>
+  </section>
+
+  <!-- 04 Ideation -->
+  <section class="blk reveal" id="ideas">
+    <p class="lab">04 · IDEATION</p>
+    <h2>Why a honeycomb</h2>
+    <div class="prose">
+      <p>I sketched mats shaped like flowers, paw prints, clovers, and a treasure hunt across different locations. Most looked fun but weren’t modular. The honeycomb was the one that could keep growing: hexagons tile perfectly, so a school could add one more cell at a time.</p>
+      <p>The bee theme became the story. One bee can’t do much, but a hive can. It’s the same with footsteps.</p>
+    </div>
+    <div class="ideas-grid">
+      <figure class="wide"><img src="images/buzztile/ideas-mats.jpg" alt="Sketches of mat concepts: flower garden, pet, clover, treasure hunt, trapezium and honeycomb" data-label="ideas-mats.jpg"><figcaption>Every mat idea, each with its own app concept.</figcaption></figure>
+      <figure><img src="images/buzztile/ideas-initial.jpg" alt="Early sketches of piezo mat layouts with notes on what works" data-label="ideas-initial.jpg"><figcaption>First layouts, with what was wrong with each.</figcaption></figure>
+      <figure><img src="images/buzztile/ideas-honeycomb.jpg" alt="Honeycomb tile sketch with dimensions: 300 mm sides, 100 mm deep" data-label="ideas-honeycomb.jpg"><figcaption>The honeycomb, at full scale.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 05 Build -->
+  <section class="blk reveal" id="build">
+    <p class="lab">05 · BUILDING IT</p>
+    <h2>Three weeks of a blank screen</h2>
+    <div class="prose">
+      <p>The goal was simple: piezo sensors make voltage when stepped on, a microcontroller catches the spikes, and an LCD shows them live. The first time I switched it on, the screen stayed blank and nothing was detected. Here’s what it took to fix it:</p>
+    </div>
+    <ol class="bugs">
+      <li><span class="bad">Voltage almost undetectable</span><span class="good">The sensors were wired in series. I rewired them in parallel.</span></li>
+      <li><span class="bad">Readings kept cutting out</span><span class="good">Twisted wires weren’t enough. I soldered every joint.</span></li>
+      <li><span class="bad">Screen still blank</span><span class="good">I’d assumed two 100&nbsp;Ω resistors equal one 10&nbsp;kΩ. They don’t. I swapped in the right one.</span></li>
+      <li><span class="bad">Too many wires to trust</span><span class="good">I replaced the 16-pin LCD with an I2C module: four wires instead of twelve.</span></li>
+      <li><span class="bad">Two boards doing one job</span><span class="good">I dropped the Arduino and let the ESP32 handle everything, from reading steps to Wi-Fi.</span></li>
+    </ol>
+    <div class="debug-row">
+      <figure><img src="images/buzztile/debug-blank.jpg" alt="ESP32 board with a blank, glowing LCD screen" data-label="debug-blank.jpg"><figcaption>Before: a glowing, empty screen.</figcaption></figure>
+      <figure><img src="images/buzztile/it-works.jpg" alt="LCD reading: Hello Medbua! It works :)" data-label="it-works.jpg"><figcaption>After: “Hello Medbua! It works :)”</figcaption></figure>
+      <figure><img src="images/buzztile/serial-monitor.jpg" alt="Serial monitor counting steps from voltage spikes up to 5 volts" data-label="serial-monitor.jpg"><figcaption>Every spike over the threshold counts as a step.</figcaption></figure>
+    </div>
+    <div class="prose"><p>Once it worked, I designed the tiles in Fusion 360 and built a 1:7 scale model to save material and cost. Then I spent two weeks at a local makerspace cutting, soldering and sanding.</p></div>
+    <ol class="fab">
+      <li><figure><img src="images/buzztile/cad.jpg" alt="CAD drawings of a hexagon tile with dimensions" data-label="cad.jpg"><figcaption><b>CAD</b>Tiles and housing in Fusion 360</figcaption></figure></li>
+      <li><figure><img src="images/buzztile/cnc-frames.jpg" alt="CNC-cut hexagon frames held up in the workshop" data-label="cnc-frames.jpg"><figcaption><b>CNC</b>Frames, plus channels for sensors and wires</figcaption></figure></li>
+      <li><figure><img src="images/buzztile/workshop.jpg" alt="Bua soldering piezo sensors into the tiles in the workshop" data-label="workshop.jpg"><figcaption><b>Solder</b>Three piezos in every tile</figcaption></figure></li>
+      <li><figure><img src="images/buzztile/laser-cut.jpg" alt="BUZZTILE lettering being laser cut" data-label="laser-cut.jpg"><figcaption><b>Laser cut</b>The logo, then an oil finish</figcaption></figure></li>
+      <li><figure><img src="images/buzztile/assembled-floor.jpg" alt="The assembled tiles with sensors and wiring visible" data-label="assembled-floor.jpg"><figcaption><b>Assemble</b>Wired up and testing at home</figcaption></figure></li>
+    </ol>
+  </section>
+
+  <!-- 06 Try -->
+  <section class="blk reveal" id="try">
+    <p class="lab">06 · STEP ON IT</p>
+    <h2>Try the tile</h2>
+    <div class="prose"><p>Click the tiles (or tap them on your phone) to step on them. Every step makes a voltage spike, and every few steps a new bee joins the hive.</p></div>
+    <div class="play" aria-label="Interactive BuzzTile simulation">
+      <div class="play-mat">
+        <div class="lcd" aria-live="polite"><span class="l1">BuzzTiles active</span><span class="l2">Steps: <b class="lcd-steps">0</b></span></div>
+        <svg class="comb" viewBox="-200 -170 400 340" role="group" aria-label="Seven hexagon tiles"></svg>
+        <button class="walk" type="button">Walk across ↗</button>
+      </div>
+      <div class="play-hive">
+        <div class="volt"><span>Last step</span><b class="volt-v">0.0 V</b><i class="volt-bar"><i></i></i></div>
+        <div class="hive"><div class="hive-body"></div><div class="bees" aria-hidden="true"></div></div>
+        <p class="hive-msg" aria-live="polite">Step on a tile to wake the hive.</p>
+        <ul class="bee-list">
+          <li data-at="5"><span>🐝</span>Worker Bee<em>5 steps</em></li>
+          <li data-at="15"><span>🔍</span>Scout Bee<em>15 steps</em></li>
+          <li data-at="30"><span>🛡️</span>Guard Bee<em>30 steps</em></li>
+          <li data-at="50"><span>👑</span>Queen Bee<em>50 steps</em></li>
+        </ul>
+        <button class="hive-reset" type="button">Reset</button>
+      </div>
+    </div>
+    <p class="note">A simulation for this page. On the real tile, a step reads around 3–5 volts.</p>
+  </section>
+
+  <!-- 07 App -->
+  <section class="blk reveal" id="app">
+    <p class="lab">07 · THE APP</p>
+    <h2>Every step powers a digital beehive</h2>
+    <div class="prose">
+      <p>A number on an LCD isn’t very exciting, so I designed an app to go with it. My research showed that feedback and rewards are what keep people motivated, so I built them into three tabs:</p>
+    </div>
+    <div class="app-feats">
+      <div><i aria-hidden="true">⬡</i><b>Hive</b><p>Steps and volts, live. The hive grows a new chamber as the school walks, with fun facts to unlock along the way.</p></div>
+      <div><i aria-hidden="true">⬡</i><b>Bees</b><p>13 bees to collect, from common Worker Bees to legendary ones hidden until 5,000 steps.</p></div>
+      <div><i aria-hidden="true">⬡</i><b>Stats</b><p>Daily, weekly and monthly totals for the whole school, so it feels like a team effort.</p></div>
+    </div>
+    <figure><img src="images/buzztile/app-showcase.jpg" alt="Four phone screens of the BuzzTile app: Hive, Fun Facts, Bee Collection and School Statistics" data-label="app-showcase.jpg"><figcaption>The final web app.</figcaption></figure>
+    <div class="sketch-row">
+      <figure><img src="images/buzztile/ui-sketches.jpg" alt="Hand-drawn sketches of the four app screens" data-label="ui-sketches.jpg"><figcaption>Sketched first: hive, learning hub, bee collection, stats.</figcaption></figure>
+      <figure><img src="images/buzztile/architecture.jpg" alt="System architecture diagram: floor mat to ESP32 to API to web app" data-label="architecture.jpg"><figcaption>How a step travels from the tile to the screen.</figcaption></figure>
+    </div>
+    <div class="prose"><p>This was my first time connecting hardware data to a front end. I learned from YouTube tutorials and short online courses, then built it with HTML, CSS Grid and JavaScript, using the DOM to update the screen whenever a step lands. The browser’s localStorage keeps the data even after a refresh.</p></div>
+  </section>
+
+  <!-- 08 Testing -->
+  <section class="blk reveal" id="testing">
+    <p class="lab">08 · TESTING</p>
+    <h2>Tested at school</h2>
+    <div class="prose"><p>I set BuzzTile up at school and invited students, teachers and passersby to try it, then interviewed them while they used it.</p></div>
+    <div class="test-chips">
+      <div><b>Ages 6–18</b><span>students across my whole target range</span></div>
+      <div><b>6 subjects</b><span>teachers from Design Technology, Business, English, Maths, Physics and PE</span></div>
+      <div><b>1 focus group</b><span>with A-level Design Technology students, for the technical critique</span></div>
+    </div>
+    <div class="prose"><p>Most people found it fun and eye-catching, and some said it made them want to learn more about the technology themselves. It started conversations, which is exactly what it was for.</p></div>
+    <div class="test-row">
+      <figure><img src="images/buzztile/bua-holding.jpg" alt="Bua holding the finished BuzzTile prototype on the school field" data-label="bua-holding.jpg"></figure>
+      <figure><img src="images/buzztile/field-lcd.jpg" alt="Close-up of the BuzzTile display stand and an open tile with three piezo sensors" data-label="field-lcd.jpg"></figure>
+      <figure><img src="images/buzztile/lcd-working.jpg" alt="LCD reading BuzzTiles active, with the step count" data-label="lcd-working.jpg"></figure>
+    </div>
+  </section>
+
+  <!-- 09 Takeaways -->
+  <section class="blk reveal" id="takeaways">
+    <p class="lab">09 · TAKEAWAYS</p>
+    <h2>What I’m taking with me</h2>
+    <ol class="takeaways">
+      <li><b>Most of the work is the part nobody sees.</b> The final tile looks clean, but there were so many things that went wrong, and times I really felt like giving up. It taught me independence.</li>
+      <li><b>Know your limits, then design around them.</b> Piezo sensors aren’t made for constant heavy impact. Mine started at 3–5 volts a step and dropped noticeably in just three months.</li>
+      <li><b>Next: full size, real hallways.</b> Tougher materials or a hybrid system, then a full-scale test in a school corridor. Done properly, I can see it in schools, parks and airports.</li>
+    </ol>
+    <blockquote class="quote">“Design isn’t just about solving problems. It’s about reimagining systems, connecting people, and making invisible forces like energy and climate visible and human.”</blockquote>
+  </section>
+
+  <!-- 10 More work -->
+  <section class="blk more reveal" id="thanks">
+    <p class="lab">10 · THANKS FOR READING :)</p>
+    <h2>More work</h2>
+    <div class="more-grid">
+      <div class="more-item">
+        <a class="slot more-card" href="ecopinet.html"><img src="images/ecopinet/win-aihm.jpg" alt="EcoPinet" data-label="EcoPinet" style="object-position:center 40%"><span class="tag"><b>EcoPinet</b> Piloted · 2025</span></a>
+        <div class="meta"><h3><a href="ecopinet.html">EcoPinet</a></h3><span class="status">Piloted · 2025</span></div>
+        <p class="line">Packaging made from pineapple waste, with seeds inside.</p>
+      </div>
+      <div class="more-item">
+        <a class="slot more-card" href="sideby.html"><img src="images/sideby/hero.jpg" alt="SideBy" data-label="SideBy" style="object-position:left center"><span class="tag"><b>SideBy</b> Concept · 2026</span></a>
+        <div class="meta"><h3><a href="sideby.html">SideBy</a></h3><span class="status">Concept · 2026</span></div>
+        <p class="line">A second pair of eyes for conversations that start to feel off.</p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+</div>
+
+</div>
+
+<footer>
+  <div class="in">
+    <div><h2>See you around :)</h2><p class="upd">Last updated Nov 2026</p></div>
+    <div class="cols">
+      <div><h5>Say hi!</h5><a href="#">LinkedIn</a><a href="#">Email</a><a href="#">Instagram</a></div>
+      <div><h5>Navigation</h5><a href="index.html#work">Work</a><a href="about.html">About</a><a href="resume.pdf">Resume</a></div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js?v=1795043196"></script>
+</body>
+</html>

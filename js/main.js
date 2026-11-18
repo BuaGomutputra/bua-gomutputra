@@ -118,7 +118,7 @@ document.querySelectorAll('.carousel').forEach(c => {
 });
 
 // Scroll reveals (ending animation + fade-ups)
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .3 });
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: .12 });
 document.querySelectorAll('.ending, .reveal').forEach(el => reduce ? el.classList.add('seen') : io.observe(el));
 
 // Case study: click any image to see it big (lightbox)
@@ -514,3 +514,78 @@ document.querySelectorAll('.yt').forEach(b => b.addEventListener('click', () => 
   f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.title = b.getAttribute('aria-label');
   b.replaceChildren(f);
 }, { once: true }));
+
+// BuzzTile: research tabs
+document.querySelectorAll('.tech').forEach(t => {
+  const tabs = [...t.querySelectorAll('[data-t]')], ps = [...t.querySelectorAll('.tp')];
+  tabs.forEach(b => b.addEventListener('click', () => {
+    tabs.forEach(x => x.setAttribute('aria-selected', x === b)); ps.forEach((p, i) => p.classList.toggle('on', i === +b.dataset.t));
+  }));
+});
+
+// BuzzTile: brief ticks + bug fixes animate in when they scroll into view
+{
+  const o = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); o.unobserve(e.target); } }), { threshold: .5 });
+  document.querySelectorAll('.brief, .bugs').forEach(el => reduce ? el.classList.add('seen') : o.observe(el));
+}
+
+// BuzzTile: playable honeycomb. Step on a tile -> voltage spike, LCD counts, bees join the hive.
+const play = document.querySelector('.play');
+if (play) {
+  const svg = play.querySelector('.comb'), NS = 'http://www.w3.org/2000/svg';
+  const lcdSteps = play.querySelector('.lcd-steps'), lcd = play.querySelector('.lcd');
+  const voltV = play.querySelector('.volt-v'), voltBar = play.querySelector('.volt-bar'), voltFill = voltBar.querySelector('i');
+  const hive = play.querySelector('.hive'), beesEl = play.querySelector('.bees'), msg = play.querySelector('.hive-msg');
+  const unlocks = [...play.querySelectorAll('.bee-list li')];
+  const R = 66, H = Math.sqrt(3) * R;
+  const hex = r => Array.from({ length: 6 }, (_, i) => { const a = Math.PI / 3 * i; return `${(r * Math.cos(a)).toFixed(1)},${(r * Math.sin(a)).toFixed(1)}`; }).join(' ');
+  // the 2-3-2 flower layout of the real prototype (flat-top hexagons)
+  const spots = [[0, -H], [0, 0], [0, H], [-1.5 * R, -H / 2], [-1.5 * R, H / 2], [1.5 * R, -H / 2], [1.5 * R, H / 2]];
+  let steps = 0, beeCount = 0, walking = false;
+  const cells = spots.map(([x, y], i) => {
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'cell'); g.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+    g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', `Tile ${i + 1}: step on it`);
+    g.innerHTML = `<g class="press"><polygon class="frame" points="${hex(R - 3)}"/><polygon class="lip" points="${hex(R - 15)}"/><polygon class="pad" points="${hex(R - 19)}"/></g>`;
+    svg.appendChild(g);
+    const go = e => { e?.preventDefault(); step(g); };
+    g.addEventListener('pointerdown', go);
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') go(e); });
+    return g;
+  });
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  function addBee() {
+    const b = document.createElement('span'); b.className = 'bee new'; b.textContent = '🐝';
+    const pt = () => [`${rnd(-150, 120).toFixed(0)}px`, `${rnd(-95, -10).toFixed(0)}px`];
+    ['0', '1', '2', '3'].forEach(k => { const [x, y] = pt(); b.style.setProperty('--x' + k, x); b.style.setProperty('--y' + k, y); });
+    b.style.setProperty('--dur', rnd(5, 9).toFixed(1) + 's');
+    beesEl.appendChild(b);
+  }
+  function step(cell) {
+    steps++;
+    const v = rnd(3, 5);
+    cell.classList.add('down'); setTimeout(() => cell.classList.remove('down'), 220);
+    const t = document.createElementNS(NS, 'text'); t.setAttribute('class', 'spark'); t.setAttribute('text-anchor', 'middle');
+    const [x, y] = cell.getAttribute('transform').match(/-?[\d.]+/g).map(Number);
+    t.setAttribute('x', x); t.setAttribute('y', y + 8); t.textContent = '+1'; svg.appendChild(t); setTimeout(() => t.remove(), 900);
+    lcdSteps.textContent = steps; lcd.classList.add('flash'); setTimeout(() => lcd.classList.remove('flash'), 120);
+    voltV.textContent = v.toFixed(1) + ' V';
+    voltBar.classList.remove('decay'); voltFill.style.width = (v / 5 * 100) + '%';
+    requestAnimationFrame(() => requestAnimationFrame(() => { voltBar.classList.add('decay'); voltFill.style.width = '0%'; }));
+    if (steps % 5 === 0 && beeCount < 14) { beeCount++; addBee(); hive.classList.add('grow'); setTimeout(() => hive.classList.remove('grow'), 400); }
+    const got = unlocks.find(li => +li.dataset.at === steps);
+    if (got) { got.classList.add('got'); msg.textContent = `New bee unlocked: ${got.childNodes[1].textContent.trim()}!`; }
+    else if (steps === 1) msg.textContent = 'Bzz. The hive is waking up…';
+    else if (steps % 5 === 0) msg.textContent = `${beeCount} bee${beeCount > 1 ? 's' : ''} in the hive. Keep walking!`;
+  }
+  play.querySelector('.walk').addEventListener('click', async () => {
+    if (walking) return; walking = true;
+    const path = [4, 3, 1, 0, 5, 6, 2, 1, 4, 3];
+    for (const i of path) { step(cells[i]); await new Promise(r => setTimeout(r, 260)); }
+    walking = false;
+  });
+  play.querySelector('.hive-reset').addEventListener('click', () => {
+    steps = beeCount = 0; lcdSteps.textContent = '0'; voltV.textContent = '0.0 V'; voltFill.style.width = '0%';
+    beesEl.replaceChildren(); unlocks.forEach(li => li.classList.remove('got')); msg.textContent = 'Step on a tile to wake the hive.';
+  });
+}
