@@ -454,34 +454,29 @@ figcaption,.figcap{font-size:14px;color:var(--soft);margin-top:12px}
 .mosaic-4 img:nth-child(4){display:none}
 .theme-eco .decisions div{border-color:rgba(63,125,46,.2)}
 
-/* EcoPinet impact v2: light green panel, award cards, number band */
-.impact-wrap{position:relative;border-radius:24px;padding:44px 40px 40px;background:#EAF6D9;background-image:radial-gradient(60% 70% at 100% 0%,rgba(255,217,90,.45),transparent 65%),radial-gradient(50% 60% at 0% 100%,rgba(182,238,140,.55),transparent 60%);overflow:hidden}
-.impact-wrap h2{font-size:max(34px,min(3.6vw,52px));margin-top:6px}
-.impact-sub{font-size:17px;color:#536049;margin:-6px 0 26px;max-width:620px}
-.awards{display:grid;grid-template-columns:1.45fr 1fr 1fr;gap:14px}
-.aw{position:relative;display:flex;flex-direction:column;background:#fff;border-radius:18px;padding:24px;box-shadow:0 1px 0 rgba(30,59,37,.06),0 10px 26px rgba(30,59,37,.07);transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
-.aw:hover{transform:translateY(-5px) rotate(-.4deg);box-shadow:0 18px 36px rgba(30,59,37,.14)}
-.aw.gold{background:linear-gradient(150deg,#FFE680,#FFD24D);}
-.aw-tag{align-self:flex-start;font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;background:rgba(30,59,37,.08);color:var(--deep);margin-bottom:18px}
-.aw.gold .aw-tag{background:rgba(255,255,255,.6)}
-.aw-logo{height:44px;width:auto;max-width:100%;object-fit:contain;align-self:flex-start;margin-bottom:12px;filter:none!important;mix-blend-mode:multiply}
-.aw-logo.tv{height:58px;mix-blend-mode:normal;margin:4px 0 auto}
-.aw-big{display:block;font-size:clamp(40px,4.4vw,64px);font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--deep);margin-top:auto}
-.aw-big i{font-style:normal}
-.aw.gold .aw-big{font-size:clamp(54px,6vw,88px)}
-.aw-meter{position:relative;height:10px;border-radius:99px;background:rgba(30,59,37,.1);margin:4px 0 26px}
-.aw-meter i{position:absolute;left:0;top:0;bottom:0;width:5%;border-radius:99px;background:var(--accent);box-shadow:0 0 0 3px rgba(182,238,140,.6)}
-.aw-meter span{position:absolute;left:0;top:16px;font-size:12.5px;color:#536049}
-.aw p{font-size:15px;line-height:1.45;color:#536049;margin-top:12px}
-.aw p strong{display:block;font-size:16.5px;color:var(--deep);font-weight:600;margin-bottom:2px}
-.aw small{display:block;font-size:13px;line-height:1.5;color:#6B5A1E;margin-top:14px;padding-top:12px;border-top:1px dashed rgba(30,59,37,.2)}
-.numbers{display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;border-radius:18px;background:var(--deep);color:#fff;overflow:hidden}
-.numbers div{padding:26px 24px;border-left:1px solid rgba(255,255,255,.1);transition:background .3s}
-.numbers div:first-child{border-left:0}
-.numbers div:hover{background:rgba(182,238,140,.08)}
-.numbers b{display:block;font-size:clamp(34px,3.4vw,48px);font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--mint)}
-.numbers b i{font-style:normal;font-variant-numeric:tabular-nums}
-.numbers span{display:block;font-size:14.5px;line-height:1.45;color:#D7E8CC;margin-top:10px}
+/* EcoPinet impact v3: photo-led proof, quiet rows, one line of numbers */
+.imp-sub{font-size:17px;line-height:1.6;color:#536049;max-width:620px;margin:-4px 0 32px}
+.imp-hero{display:grid;grid-template-columns:1.4fr 1fr;gap:min(3.3vw,40px);align-items:end}
+.imp-photo{margin:0;border-radius:10px;overflow:hidden;aspect-ratio:3/2;background:var(--lav)}
+.imp-photo img,.imp-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.imp-photo,.imp-thumb{transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.imp-photo:hover,.imp-thumb:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(30,59,37,.12)}
+.imp-big{display:block;font-size:clamp(48px,5.6vw,80px);font-weight:600;letter-spacing:-.035em;line-height:.95;color:var(--deep);white-space:nowrap}
+.imp-hero-text h3{font-size:19px;font-weight:600;line-height:1.35;color:var(--ink);margin:16px 0 6px}
+.imp-hero-text p{font-size:16px;line-height:1.55;color:#5E5E5E;max-width:300px}
+.imp-rows{margin-top:32px;border-top:1px solid rgba(20,20,20,.1)}
+.imp-row{display:grid;grid-template-columns:168px 1fr;gap:24px;align-items:center;padding:20px 0;border-bottom:1px solid rgba(20,20,20,.1)}
+.imp-thumb{width:168px;height:112px;border-radius:8px;overflow:hidden;background:var(--lav)}
+.imp-thumb.logo{background:#fff;box-shadow:inset 0 0 0 1px rgba(20,20,20,.08);display:grid;place-items:center}
+.imp-thumb.logo img{width:78%;height:auto;object-fit:contain}
+.imp-row b{display:block;font-size:17px;font-weight:600;color:var(--deep)}
+.imp-row p{font-size:15.5px;line-height:1.5;color:#5E5E5E;margin-top:4px}
+.imp-nums{display:grid;grid-template-columns:repeat(4,1fr);margin-top:32px}
+.imp-nums div{padding:4px 20px;border-left:1px solid rgba(20,20,20,.1)}
+.imp-nums div:first-child{padding-left:0;border-left:0}
+.imp-nums b{display:block;font-size:clamp(28px,2.6vw,36px);font-weight:600;letter-spacing:-.03em;line-height:1.1;color:var(--deep)}
+.imp-nums b i{font-style:normal;font-variant-numeric:tabular-nums}
+.imp-nums span{display:block;font-size:14px;line-height:1.45;color:#5E5E5E;margin-top:6px}
 /* lede, links, my part spacing */
 .lede-more{font-size:17px;line-height:1.65;color:var(--soft);max-width:720px;margin-top:16px}
 .theme-eco .eco-links{margin-top:40px}
@@ -798,7 +793,7 @@ footer .cols a:hover{color:#fff}
   .app{grid-template-columns:1fr;padding:26px}.app-phones{height:400px}.aph{width:150px;height:322px;border-radius:26px}.aph.p2{margin-left:-75px}.ms-view{aspect-ratio:4/3}.ms-view figcaption{font-size:13.5px;padding:10px 12px}
   .mosaic-4{grid-template-columns:1fr 1fr;grid-template-rows:200px 140px}
   .impact{grid-template-columns:1fr 1fr!important}
-  .impact-wrap{padding:26px 18px}.awards{grid-template-columns:1fr}.numbers{grid-template-columns:1fr 1fr}.numbers div:nth-child(3){border-left:0}.numbers div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
+  .imp-hero{grid-template-columns:1fr;gap:20px}.imp-big{font-size:52px}.imp-hero-text p{max-width:none}.imp-row{grid-template-columns:112px 1fr;gap:16px}.imp-thumb{width:112px;height:84px}.imp-nums{grid-template-columns:1fr 1fr;row-gap:20px}.imp-nums div:nth-child(3){padding-left:0;border-left:0}
   .yt-grid{grid-template-columns:1fr!important}.team-row{grid-template-columns:1fr}.tr-side{grid-template-rows:auto auto}.tr-side img{aspect-ratio:4/3}
   .theme-eco .app-phones{height:420px}.theme-eco .app{padding:26px}.yt-grid{grid-template-columns:1fr 1fr}.press{grid-template-columns:1fr}.prod3{grid-template-columns:1fr 1fr}.prod3 img:last-child{display:none}.hotel{grid-template-columns:1fr;padding:20px}.hotel-pics{height:230px}
   .try-row{grid-template-columns:1fr;gap:28px}.device{width:min(340px,100%);height:700px;margin:0 auto;border-radius:48px}.device-screen{border-radius:38px}.phones{gap:14px}
