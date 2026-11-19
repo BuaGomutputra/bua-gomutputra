@@ -1233,3 +1233,5 @@ footer .cols a:hover{color:#fff}
   .av-sketch img{height:46vw}.av-phone img{height:62vw}
 }
 @media (max-width:560px){.matrix thead th{overflow-wrap:anywhere;font-size:11px}}
+.talk{margin:0}
+.talk video{width:100%;aspect-ratio:16/9;display:block;border-radius:14px;background:var(--deep);box-shadow:0 14px 34px rgba(35,39,28,.16)}
