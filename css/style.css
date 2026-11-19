@@ -1176,3 +1176,19 @@ footer .cols a:hover{color:#fff}
 .test-row figure:first-child img{object-position:35% 60%}
 .fab li:last-child img{object-position:50% 70%}
 @media (max-width:900px){.test-row{grid-template-columns:1fr 1fr}}
+/* BuzzTile v5: problem + photo, matrix with technologies across the top */
+.problem-pair{display:grid;grid-template-columns:1fr 260px;gap:min(4vw,48px);align-items:start;max-width:960px}
+.problem-pair figure{margin:0}
+.problem-pair img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;display:block;transform:rotate(1.5deg);box-shadow:0 10px 24px rgba(35,39,28,.12);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.problem-pair img:hover{transform:rotate(0) translateY(-4px)}
+.problem-pair figcaption{margin-top:14px}
+.matrix thead th{font-family:var(--font);font-size-adjust:none;font-size:14.5px;font-weight:600;color:var(--ink);vertical-align:bottom;padding-top:16px}
+.matrix thead th em{display:block;width:max-content;margin:6px auto 0}
+.matrix thead th:not(.pick){padding-bottom:36px}
+.matrix tbody th{font-family:var(--mono);font-size-adjust:.5;font-size:13.5px;font-weight:400;color:var(--accent)}
+.matrix tr.pick{background:none}
+.matrix .pick{background:var(--lav)}
+.matrix tbody tr:hover{background:none}
+.matrix tbody tr:hover td,.matrix tbody tr:hover th{background:#FFFBEF}
+.matrix tbody tr:hover td.pick{background:#FBEFC8}
+@media (max-width:760px){.problem-pair{grid-template-columns:1fr}.problem-pair figure{max-width:280px}}
